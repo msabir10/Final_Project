@@ -4,6 +4,7 @@ Levine, Lev - Machine Learning
 Alexander, Lydia - Database
 Sabir, Muhammad - Github
 
+### Overview
 ✓ Selected topic
 ✓ Reason why they selected their topic
 ✓ Description of their source of data
