@@ -2,11 +2,11 @@
 
 ## Collaborators 
 
-Levine, Lev - Machine Learning
+**Alexander, Lydia** - Database
 
-Alexander, Lydia - Database
+**Sabir, Muhammad** - Github & Vizualization
 
-Sabir, Muhammad - Github & Vizualization
+**Levine, Lev** - Machine Learning
 
 ## Overview
 
@@ -20,9 +20,9 @@ Sabir, Muhammad - Github & Vizualization
 
 ### Description of data sorces
 
-  - Yahoo Finance dataset on Kaggle  [https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013]('https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013')
-  - Yahoo Finance API [https://www.yahoofinanceapi.com/]('https://www.yahoofinanceapi.com/')
-  - yfinance Library [https://pypi.org/project/yfinance/]('https://pypi.org/project/yfinance/')
+  - Yahoo Finance dataset on Kaggle  [https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013](https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013)
+  - Yahoo Finance API [https://www.yahoofinanceapi.com/](https://www.yahoofinanceapi.com/)
+  - yfinance Library [https://pypi.org/project/yfinance/](https://pypi.org/project/yfinance/)
 
 ### Questions they hope to answer with the data
 
@@ -41,17 +41,17 @@ Initial Feature Variables:
 - **Price per Earnings** (Trailing P/E) 
 - **Earnings per Share** (Diluted EPS)
 
-The model is using the 3 hidden layers:
+The model is using the **3 hidden layers**:
 
-- hidden_nodes_layer1 = 80 neurons
-- hidden_nodes_layer2 = 30 neurons
-- hidden_nodes_layer3 = 10 neurons
+- hidden_nodes_layer1 = **80 neurons**
+- hidden_nodes_layer2 = **30 neurons**
+- hidden_nodes_layer3 = **10 neurons**
 
-The **SELU** activation function is used on all the Hidden layers. 
+The **SELU** activation function is used on all the **Hidden layers**. 
 
-The **Linear** activation function is used on all the Output layer. 
+The **Linear** activation function is used on all the **Output layer**. 
 
-The initial model is run 50 pochs to train and is generating Loss: 20299.24
+The initial model is run **50 epochs** to train and is generating **Loss: 20299.24**
 
 ### Data preprosessing
 
