@@ -1,8 +1,11 @@
 # Final_Project
 
 ## Collaborators 
+
 Levine, Lev - Machine Learning
+
 Alexander, Lydia - Database
+
 Sabir, Muhammad - Github & Vizualization
 
 ## Overview
@@ -17,9 +20,9 @@ Sabir, Muhammad - Github & Vizualization
 
 ### Description of data sorces
 
-  - Yahoo Finance dataset on Kaggle  ['https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013']('https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013')
-  - Yahoo Finance API ['https://www.yahoofinanceapi.com/']('https://www.yahoofinanceapi.com/')
-  - yfinance Library ['https://pypi.org/project/yfinance/'](https://pypi.org/project/yfinance/')
+  - Yahoo Finance dataset on Kaggle  [https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013]('https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013')
+  - Yahoo Finance API [https://www.yahoofinanceapi.com/]('https://www.yahoofinanceapi.com/')
+  - yfinance Library [https://pypi.org/project/yfinance/]('https://pypi.org/project/yfinance/')
 
 ### Questions they hope to answer with the data
 
