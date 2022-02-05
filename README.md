@@ -13,4 +13,4 @@ Sabir, Muhammad - Github
   * Yahoo Finance API
 * Questions they hope to answer with
 the data
-  *Predict prices for next 15-30 days
+  * Predict prices for next 15-30 days
