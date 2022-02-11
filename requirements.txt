@@ -1,4 +1,4 @@
-pandas @ file:///C:/ci/pandas_1618365634936/work
+#pandas @ file:///C:/ci/pandas_1618365634936/work
 numpy @ file:///C:/ci/numpy_and_numpy_base_1618497418457/work
 scikit-learn==1.0
 json5==0.9.5

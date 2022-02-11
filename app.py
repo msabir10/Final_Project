@@ -46,7 +46,7 @@ def analyzer():
         ticker = request.form.get("inputticker")
         #return ticker
     
-    analyze.run_all(ticker)
+    #analyze.run_all(ticker)
     #rec = analyze.recommendation(current_price, predicted_price)
     return redirect('/', code=302)
 
