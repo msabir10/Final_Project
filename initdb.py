@@ -1,4 +1,4 @@
-from February_Project.app import db
+from stock-analyzer-uncc.app import db
 
 # db.drop_all()
 db.create_all()
