@@ -2,12 +2,14 @@ from msilib.schema import Binary
 from turtle import pd
 from flask import Flask, render_template, redirect, url_for, request
 import os
-#from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 from config import postgres_pass
 import analyze
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zrzqqcjhzcyaje:9208481eb51aa2fad9071ab3f78435d4e471df3a3be08a8b44e66055751b73c1@ec2-18-215-8-186.compute-1.amazonaws.com:5432/d24lp1nuba41a9'
+db = SQLAlchemy(app)
     
 def get_db_connection():
     conn = psycopg2.connect(host="localhost", port = 5432, database="final_project", user="postgres", password=postgres_pass)
