@@ -1,1 +1,1 @@
-web: gunicorn February_Project.app:app
+web: gunicorn stockoptimizer:app
