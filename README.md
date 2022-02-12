@@ -28,6 +28,10 @@
 
   * Predict prices for next 15-30 days
 
+## Database
+- A database was created using postgreSQL (see **provisional_database_v1**)
+- The machine learning module is connected to the database.
+
 ## Machine Learning Model
 
 ### Model Overview 
