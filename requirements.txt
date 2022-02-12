@@ -15,4 +15,5 @@ keras-nightly==2.9.0.dev2022012308
 Keras-Preprocessing==1.1.2
 yfinance==0.1.70
 Flask==1.1.2
+sqlalchemy==1.4.7
 
