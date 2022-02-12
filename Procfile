@@ -1,1 +1,1 @@
-web: gunicorn February_Project:app
+web: gunicorn app:app
