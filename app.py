@@ -6,7 +6,7 @@ import pandas as pd
 import sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
-from config import postgres_pass, heroku_pass, heroku_URI
+#from config import postgres_pass, heroku_pass, heroku_URI
 import analyze
 import yfinance as yf
 

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 import requests
-from config import api_key, postgres_pass, heroku_pass, heroku_URI
+#from config import api_key, postgres_pass, heroku_pass, heroku_URI
 import yfinance as yf
 
 def data_etl():
