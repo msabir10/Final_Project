@@ -1,9 +1,13 @@
 import pandas as pd
 import numpy as np
 import json
+import os
 import requests
 #from config import api_key, postgres_pass, heroku_pass, heroku_URI
 import yfinance as yf
+from boto.s3.connection import S3Connection
+
+s3 = S3Connection(os.environ['heroku_pass'], os.environ['heroku_URI'])
 
 def data_etl():
     # Read the raw data
@@ -162,7 +166,7 @@ def data_predict(ticker):
     import tensorflow as tf
     from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
     from sqlalchemy import create_engine
-    from config import postgres_pass
+    #from config import postgres_pass
     
     h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     h_database = 'd9j5jmck4g9so5'
@@ -172,7 +176,7 @@ def data_predict(ticker):
     l_host = 'localhost'
     l_database = 'final_project'
     l_user = 'postgres'
-    l_password = postgres_pass
+    #l_password = postgres_pass
 
     conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
 

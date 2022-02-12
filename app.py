@@ -9,6 +9,9 @@ import psycopg2
 #from config import postgres_pass, heroku_pass, heroku_URI
 import analyze
 import yfinance as yf
+from boto.s3.connection import S3Connection
+
+s3 = S3Connection(os.environ['heroku_pass'], os.environ['heroku_URI'])
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = heroku_URI
@@ -25,7 +28,7 @@ def get_db_connection():
     l_host = 'localhost'
     l_database = 'final_project'
     l_user = 'postgres'
-    l_password = postgres_pass
+    #l_password = postgres_pass
 
     conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
     return conn
