@@ -5,7 +5,7 @@ import os
 import sqlalchemy
 #from flask_sqlalchemy import SQLAlchemy
 import psycopg2
-from config import postgres_pass
+#from config import postgres_pass
 import analyze
 
 app = Flask(__name__)

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 import requests
-from config import api_key
+#from config import api_key
 import yfinance as yf
 
 def data_etl():
