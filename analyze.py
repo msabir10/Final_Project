@@ -163,9 +163,23 @@ def data_predict(ticker):
     from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
     from sqlalchemy import create_engine
     from config import postgres_pass
-    conn = psycopg2.connect(host="localhost", port = 5432, database="final_project", user="postgres", password=postgres_pass)
+    
+    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    h_database = 'd9j5jmck4g9so5'
+    h_user = 'qneoyqliwppucg'
+    h_password = '5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14'
 
-    db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    l_host = 'localhost'
+    l_database = 'final_project'
+    l_user = 'postgres'
+    l_password = postgres_pass
+
+    conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
+
+    l_db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    h_URI = 'postgres://qneoyqliwppucg:5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14@ec2-18-235-114-62.compute-1.amazonaws.com:5432/d9j5jmck4g9so5'
+    
+    db_string = h_URI
     engine = create_engine(db_string) 
 
     # Move the Cleaned data to Postgres

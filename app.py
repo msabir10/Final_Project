@@ -9,11 +9,23 @@ from config import postgres_pass
 import analyze
 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zrzqqcjhzcyaje:9208481eb51aa2fad9071ab3f78435d4e471df3a3be08a8b44e66055751b73c1@ec2-18-215-8-186.compute-1.amazonaws.com:5432/d24lp1nuba41a9'
-#db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zrzqqcjhzcyaje:9208481eb51aa2fad9071ab3f78435d4e471df3a3be08a8b44e66055751b73c1@ec2-18-215-8-186.compute-1.amazonaws.com:5432/d24lp1nuba41a9'
+db = sqlalchemy(app)
     
 def get_db_connection():
-    conn = psycopg2.connect(host="localhost", port = 5432, database="final_project", user="postgres", password=postgres_pass)
+
+
+    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    h_database = 'd9j5jmck4g9so5'
+    h_user = 'qneoyqliwppucg'
+    h_password = '5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14'
+
+    l_host = 'localhost'
+    l_database = 'final_project'
+    l_user = 'postgres'
+    l_password = postgres_pass
+
+    conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
     return conn
 
 @app.route("/", methods =["GET", "POST"])
