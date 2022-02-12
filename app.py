@@ -1,5 +1,5 @@
-from msilib.schema import Binary
-from turtle import pd
+#from msilib.schema import Binary
+#from turtle import pd
 from flask import Flask, render_template, redirect, url_for, request
 import os
 import sqlalchemy
