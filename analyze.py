@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 import requests
-#from config import api_key
+from config import api_key, postgres_pass, heroku_pass, heroku_URI
 import yfinance as yf
 
 def data_etl():
@@ -167,7 +167,7 @@ def data_predict(ticker):
     h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     h_database = 'd9j5jmck4g9so5'
     h_user = 'qneoyqliwppucg'
-    h_password = '5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14'
+    h_password = heroku_pass
 
     l_host = 'localhost'
     l_database = 'final_project'
@@ -177,7 +177,7 @@ def data_predict(ticker):
     conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
 
     l_db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
-    h_URI = 'postgres://qneoyqliwppucg:5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14@ec2-18-235-114-62.compute-1.amazonaws.com:5432/d9j5jmck4g9so5'
+    h_URI = heroku_URI
     
     db_string = h_URI
     engine = create_engine(db_string) 

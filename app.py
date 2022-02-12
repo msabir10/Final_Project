@@ -2,14 +2,16 @@
 #from turtle import pd
 from flask import Flask, render_template, redirect, url_for, request
 import os
+import pandas as pd
 import sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
-#from config import postgres_pass
+from config import postgres_pass, heroku_pass, heroku_URI
 import analyze
+import yfinance as yf
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zrzqqcjhzcyaje:9208481eb51aa2fad9071ab3f78435d4e471df3a3be08a8b44e66055751b73c1@ec2-18-215-8-186.compute-1.amazonaws.com:5432/d24lp1nuba41a9'
+app.config['SQLALCHEMY_DATABASE_URI'] = heroku_URI
 db = SQLAlchemy(app)
     
 def get_db_connection():
@@ -18,7 +20,7 @@ def get_db_connection():
     h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     h_database = 'd9j5jmck4g9so5'
     h_user = 'qneoyqliwppucg'
-    h_password = '5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14'
+    h_password = heroku_pass
 
     l_host = 'localhost'
     l_database = 'final_project'
@@ -37,12 +39,32 @@ def index():
     
     conn = get_db_connection()
     cur = conn.cursor()
-
+    
+    # Create initial table
+    cur.execute("CREATE TABLE predicted_price (predictedprice FLOAT); INSERT INTO predicted_price (predictedprice) VALUES (1.1)")
+    
     cur.execute("SELECT * from predicted_price;")
     predicted_price = cur.fetchall()
     predicted_price = list(predicted_price)[0][0]
+    
+    # Create initial table
+    ticker = "ADBE"
+    ticker_dict = yf.Ticker(ticker)
+    t_info = ticker_dict.info
 
-  
+    # Get Ticker Features
+    tick_df = pd.DataFrame(list(t_info.items()))
+    tick_df = tick_df.transpose()
+    new_header = tick_df.iloc[0] 
+    for i in range(len(new_header)):
+        new_header[i] = new_header[i].lower()
+    new_header
+    tick_df = tick_df[1:] 
+    tick_df.columns = new_header
+
+    #Selected Ticker to Postgres
+    tick_df.to_sql(name='ticker', con=engine, if_exists='replace')
+    
     cur.execute("SELECT * from ticker;")
     ticker = cur.fetchall()
     business_summary = ticker[0][4]
