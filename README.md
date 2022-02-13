@@ -38,6 +38,7 @@ Top Reasons For Choosing:
 
 ## Database
 - A database was created using postgreSQL
+
     ![](database/provisional_database_v1.PNG)
 
 - The machine learning module is connected to the database.
