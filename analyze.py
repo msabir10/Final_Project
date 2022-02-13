@@ -172,7 +172,7 @@ def initialize_table():
     import psycopg2
     import pandas as pd
     from sqlalchemy import create_engine
-    from config import postgres_pass
+    #from config import postgres_pass
 
     h_database = os.environ['heroku_database'] #bbb.get_key('heroku_database')
     h_user = os.environ['heroku_user'] #bbb.get_key('heroku_user')
