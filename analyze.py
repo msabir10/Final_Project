@@ -58,14 +58,15 @@ def data_analysis():
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
     import pandas as pd
-    from tensorflow import keras
+    #from tensorflow 
+    import keras
     #turn off the warnings
     import warnings
     warnings.filterwarnings('ignore')
 
     # Import checkpoint dependencies
     import os
-    from tensorflow.keras.callbacks import ModelCheckpoint
+    from keras.callbacks import ModelCheckpoint
     from sklearn.ensemble import RandomForestRegressor
     from sklearn.ensemble import GradientBoostingClassifier
     from sklearn.ensemble import RandomForestClassifier
@@ -225,10 +226,11 @@ def data_predict(ticker):
     import pandas as pd
     import psycopg2
     #import tensorflow as tf
-    from tensorflow import keras
+    #from tensorflow 
+    import keras
     from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
     from sqlalchemy import create_engine
-    from config import postgres_pass
+    #from config import postgres_pass
     
     h_database = os.environ['heroku_database'] #bbb.get_key('heroku_database')
     h_user = os.environ['heroku_user'] #bbb.get_key('heroku_user')
@@ -293,7 +295,8 @@ def data_predict(ticker):
     
 
     # Load the Saved Model
-    from tensorflow import keras
+    #from tensorflow 
+    import keras
     nn = keras.models.load_model("Model/Stock_Optimization.h5")
 
     # Run the model to predict Stock Price
