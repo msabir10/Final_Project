@@ -12,11 +12,12 @@ import yfinance as yf
 from boto.s3.connection import S3Connection
 
 #Heroku secret key config
-s3 = S3Connection(os.environ['heroku_pass'], os.environ['heroku_URI'],os.environ['heroku_user'],os.environ['heroku_database'])
-bbb = s3.get_bucket(s3)
-h_database = bbb.get_key('heroku_database')
-h_user = bbb.get_key('heroku_user')
-h_password = bbb.get_key('heroku_pass')
+#s3 = S3Connection(os.environ['heroku_pass'], os.environ['heroku_URI'],os.environ['heroku_user'],os.environ['heroku_database'])
+#bbb = s3.get_bucket(s3)
+h_database = os.environ['heroku_database'] #bbb.get_key('heroku_database')
+h_user = os.environ['heroku_user'] #bbb.get_key('heroku_user')
+h_password = os.environ['heroku_pass'] #bbb.get_key('heroku_pass')
+heroku_URI = os.environ['heroku_URI']
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = heroku_URI
