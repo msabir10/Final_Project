@@ -2,11 +2,7 @@
 
 ## Collaborators 
 
-**Alexander, Lydia** - Database
-
-**Sabir, Muhammad** - Github & Vizualization
-
-**Levine, Lev** - Machine Learning
+The team has made the decision to collaborate on this project working on and submitting each area as a team.
 
 ## Overview
 
@@ -14,9 +10,21 @@
 
   * Stock Market Prediction
 
-### Reason why they selected their topic
+### Reasons We Selected This Topic
 
-  * Wanted to work on something useful and found this interesting
+Statistics:
+- $95 trillion is the global stock market value.
+- The current stock market crash interrupted a 10-year record.
+- On average, the stock market performs the poorest in September.
+- The US represents about 55.9% of the total global stock market capitalization.
+- 55% of US adults have money in the stock market.
+- About 10% of US households hold international equity.
+[Source: Stock Market Statistics](https://spendmenot.com/blog/stock-market-statistics/#:~:text=Let%E2%80%99s%20see%20how%20many%20people%20invest%20in%20the,of%20Americans%20own%20stocks%2C%20the%20answer%20is%2052%25)
+
+Top Reasons For Choosing:
+  * The stock market is a data rich topic with data available for analysis to include APIs, libraries and static data to pull from. Having a large amount of data for our model will increase the liklihood of our model being successful.
+  * This topic is very relevant to the maturity of the American people.  As the above statistics detail, 55% of US adults have money in the stock market, making this topic very significant to a large number of people in the US.
+  * A member of our team is very involved in the day trading of the stock market and understands the business.
 
 ### Description of data sorces
 
@@ -24,12 +32,13 @@
   - Yahoo Finance API [https://www.yahoofinanceapi.com/](https://www.yahoofinanceapi.com/)
   - yfinance Library [https://pypi.org/project/yfinance/](https://pypi.org/project/yfinance/)
 
-### Questions they hope to answer with the data
-
-  * Predict prices for next 15-30 days
+### Questions the App will Answer with the Data
+  * Based on the data input into our model, should the end user buy/sell a specific stock.
 
 ## Database
-- A database was created using postgreSQL (see **provisional_database_v1**)
+- A database was created using postgreSQL
+    ![](database/provisional_database_v1.PNG.png)
+
 - The machine learning module is connected to the database.
 
 ## Machine Learning Model
