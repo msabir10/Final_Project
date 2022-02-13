@@ -334,7 +334,7 @@ def run_all(ticker):
     #data_etl()
     #data_analysis()
     initialize_table()
-    #data_predict(ticker)
+    data_predict(ticker)
     return None
 
 if __name__ == "__main__":

@@ -63,6 +63,9 @@ def index():
     engine = create_engine(db_string) 
     cur = conn.cursor()
     
+    #Create tables
+    analyze.initialize_table()
+
     cur.execute("SELECT * from predicted_price;")
     predicted_price = cur.fetchall()
     predicted_price = list(predicted_price)[0][0]
