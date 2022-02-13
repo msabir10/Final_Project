@@ -5,6 +5,9 @@ import os
 import requests
 #from config import api_key, postgres_pass, heroku_pass, heroku_URI
 import yfinance as yf
+import psycopg2
+from sqlalchemy import create_engine
+
 from boto.s3.connection import S3Connection
 
 #Heroku secret key config
@@ -73,7 +76,7 @@ def data_analysis():
     #import clean data
     cdf0 = pd.read_csv('Resources/clean_data.csv')
 
-    cdf = cdf0.drop(columns = ['Date','Ticker','DE Ratio',
+    cdf = cdf0.drop(columns = ['Date','Ticker',#'DE Ratio',
     #'Trailing P/E',
     'Price/Sales',
     'Price/Book',
@@ -102,7 +105,7 @@ def data_analysis():
     'Book Value Per Share',
     'Cash Flow',
     'Beta'
-                            ])
+                         ])
     active_col = cdf.columns.to_list()
 
     # Split our preprocessed data into our features and target arrays
@@ -161,8 +164,58 @@ def data_analysis():
     #pred.shape
 
     # Export the model to HDF5 file
-    nn.save("Model/AlphabetSoupCharity_Optimization.h5")
+    nn.save("Model/Stock_Optimization.h5")
     #return None
+
+def initialize_table():
+    import psycopg2
+    import pandas as pd
+    from sqlalchemy import create_engine
+    from config import postgres_pass
+
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_database = heroku_database
+    #h_user = heroku_user
+    #h_password = heroku_pass
+
+    #l_host = 'localhost'
+    #l_database = 'final_project'
+    #l_user = 'postgres'
+    #l_password = postgres_pass
+
+    conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
+
+    #db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    h_URI = heroku_URI
+    
+    db_string = h_URI
+    engine = create_engine(db_string) 
+
+    #Select Ticker
+    ticker = 'adbe'
+
+    # pull Ticker details from Yahoo Finance
+    ticker_dict = yf.Ticker(ticker)
+    t_info = ticker_dict.info
+
+    # Get Ticker Features
+    tick_df = pd.DataFrame(list(t_info.items()))
+    tick_df = tick_df.transpose()
+    new_header = tick_df.iloc[0] 
+    for i in range(len(new_header)):
+        new_header[i] = new_header[i].lower()
+    new_header
+    tick_df = tick_df[1:] 
+    tick_df.columns = new_header
+
+    #Selected Ticker to Postgres
+    tick_df.to_sql(name='ticker', con=engine, if_exists='replace')
+
+    # Create initial table
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS predicted_price (predictedprice FLOAT); INSERT INTO predicted_price (predictedprice) VALUES (1.1)")
+
+    return None
 
 def data_predict(ticker):
 
@@ -172,21 +225,21 @@ def data_predict(ticker):
     import tensorflow as tf
     from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
     from sqlalchemy import create_engine
-    #from config import postgres_pass
+    from config import postgres_pass
     
-    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     #h_database = heroku_database
     #h_user = heroku_user
     #h_password = heroku_pass
 
-    l_host = 'localhost'
-    l_database = 'final_project'
-    l_user = 'postgres'
+    #l_host = 'localhost'
+    #l_database = 'final_project'
+    #l_user = 'postgres'
     #l_password = postgres_pass
 
     conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
 
-    #l_db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    #db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
     h_URI = heroku_URI
     
     db_string = h_URI
@@ -237,7 +290,7 @@ def data_predict(ticker):
 
     # Load the Saved Model
     from tensorflow import keras
-    nn = keras.models.load_model("Model/AlphabetSoupCharity_Optimization.h5")
+    nn = keras.models.load_model("Model/Stock_Optimization.h5")
 
     # Run the model to predict Stock Price
     query_results = np.array(query_results).reshape(-1,1)
@@ -277,6 +330,7 @@ def recommendation(cp, pp):
 def run_all(ticker):
     #data_etl()
     #data_analysis()
+    initialize_table()
     data_predict(ticker)
     return None
 

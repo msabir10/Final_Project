@@ -4,6 +4,7 @@ from flask import Flask, render_template, redirect, url_for, request
 import os
 import pandas as pd
 import sqlalchemy
+from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 #from config import postgres_pass, heroku_pass, heroku_URI
@@ -25,18 +26,24 @@ db = SQLAlchemy(app)
     
 def get_db_connection():
 
-
-    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     #h_database = heroku_database
     #h_user = heroku_user
     #h_password = heroku_pass
 
-    l_host = 'localhost'
-    l_database = 'final_project'
-    l_user = 'postgres'
+    #l_host = 'localhost'
+    #l_database = 'final_project'
+    #l_user = 'postgres'
     #l_password = postgres_pass
 
     conn = psycopg2.connect(host=h_host, port = 5432, database=h_database, user=h_user, password=h_password)
+
+    #db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    h_URI = heroku_URI
+    
+    db_string = h_URI
+    engine = create_engine(db_string) 
+
     return conn
 
 @app.route("/", methods =["GET", "POST"])
@@ -47,32 +54,16 @@ def index():
         #return ticker
     
     conn = get_db_connection()
-    cur = conn.cursor()
+    #db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    h_URI = heroku_URI
     
-    # Create initial table
-    cur.execute("CREATE TABLE predicted_price (predictedprice FLOAT); INSERT INTO predicted_price (predictedprice) VALUES (1.1)")
+    db_string = h_URI
+    engine = create_engine(db_string) 
+    cur = conn.cursor()
     
     cur.execute("SELECT * from predicted_price;")
     predicted_price = cur.fetchall()
     predicted_price = list(predicted_price)[0][0]
-    
-    # Create initial table
-    ticker = "ADBE"
-    ticker_dict = yf.Ticker(ticker)
-    t_info = ticker_dict.info
-
-    # Get Ticker Features
-    tick_df = pd.DataFrame(list(t_info.items()))
-    tick_df = tick_df.transpose()
-    new_header = tick_df.iloc[0] 
-    for i in range(len(new_header)):
-        new_header[i] = new_header[i].lower()
-    new_header
-    tick_df = tick_df[1:] 
-    tick_df.columns = new_header
-
-    #Selected Ticker to Postgres
-    tick_df.to_sql(name='ticker', con=engine, if_exists='replace')
     
     cur.execute("SELECT * from ticker;")
     ticker = cur.fetchall()
