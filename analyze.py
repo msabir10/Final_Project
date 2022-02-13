@@ -337,7 +337,7 @@ def recommendation(cp, pp):
 def run_all(ticker):
     #data_etl()
     #data_analysis()
-    initialize_table()
+    #initialize_table()
     data_predict(ticker)
     return None
 

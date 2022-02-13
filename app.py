@@ -64,7 +64,7 @@ def index():
     cur = conn.cursor()
     
     #Create tables
-    analyze.initialize_table()
+    #analyze.initialize_table()
 
     cur.execute("SELECT * from predicted_price;")
     predicted_price = cur.fetchall()
