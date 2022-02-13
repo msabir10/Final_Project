@@ -19,6 +19,7 @@ h_database = os.environ['heroku_database'] #bbb.get_key('heroku_database')
 h_user = os.environ['heroku_user'] #bbb.get_key('heroku_user')
 h_password = os.environ['heroku_pass'] #bbb.get_key('heroku_pass')
 heroku_URI = os.environ['heroku_URI']
+h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = heroku_URI
