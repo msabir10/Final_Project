@@ -58,7 +58,7 @@ def data_analysis():
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
     import pandas as pd
-    import tensorflow as tf
+    from tensorflow import keras
     #turn off the warnings
     import warnings
     warnings.filterwarnings('ignore')
@@ -133,19 +133,19 @@ def data_analysis():
     hidden_nodes_layer2 = 30
     hidden_nodes_layer3 = 10
 
-    nn = tf.keras.models.Sequential()
+    nn = keras.models.Sequential()
 
     # First hidden layer
-    nn.add(tf.keras.layers.Dense(units=hidden_nodes_layer1, input_dim=number_input_features, activation="relu"))
+    nn.add(keras.layers.Dense(units=hidden_nodes_layer1, input_dim=number_input_features, activation="relu"))
 
     # Second hidden layer
-    nn.add(tf.keras.layers.Dense(units=hidden_nodes_layer2, activation="selu"))
+    nn.add(keras.layers.Dense(units=hidden_nodes_layer2, activation="selu"))
 
     # Third hidden layer
-    nn.add(tf.keras.layers.Dense(units=hidden_nodes_layer3, activation="selu"))
+    nn.add(keras.layers.Dense(units=hidden_nodes_layer3, activation="selu"))
 
     # Output layer
-    nn.add(tf.keras.layers.Dense(units=1, activation="selu"))
+    nn.add(keras.layers.Dense(units=1, activation="selu"))
 
     train_size = len(X_train_scaled)
 
@@ -224,7 +224,8 @@ def data_predict(ticker):
     #Connect to PostgreSQL
     import pandas as pd
     import psycopg2
-    import tensorflow as tf
+    #import tensorflow as tf
+    from tensorflow import keras
     from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
     from sqlalchemy import create_engine
     from config import postgres_pass
