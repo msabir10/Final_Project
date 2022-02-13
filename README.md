@@ -134,3 +134,7 @@ The initial model is run **50 epochs** to train and is generating **Loss: 14.63*
 3. Run the DL model to predict prices for each stock
 4. Display predicted and current prices sorted in the descending order of the investment opportunity
 5. Provide a recommendation on which stocks to invest
+
+### Prototype App Deployment on HEROKU
+
+[https://stockoptimizer.herokuapp.com/](https://stockoptimizer.herokuapp.com/)
