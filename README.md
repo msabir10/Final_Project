@@ -19,6 +19,7 @@ Statistics:
 - The US represents about 55.9% of the total global stock market capitalization.
 - 55% of US adults have money in the stock market.
 - About 10% of US households hold international equity.
+
 [Source: Stock Market Statistics](https://spendmenot.com/blog/stock-market-statistics/#:~:text=Let%E2%80%99s%20see%20how%20many%20people%20invest%20in%20the,of%20Americans%20own%20stocks%2C%20the%20answer%20is%2052%25)
 
 Top Reasons For Choosing:
@@ -37,7 +38,8 @@ Top Reasons For Choosing:
 
 ## Database
 - A database was created using postgreSQL
-    ![](database/provisional_database_v1.PNG.png)
+
+    ![](database/provisional_database_v1.PNG)
 
 - The machine learning module is connected to the database.
 
