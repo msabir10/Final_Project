@@ -24,6 +24,9 @@ h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = heroku_URI
 db = SQLAlchemy(app)
+
+#Create Tables
+analyze.initialize_table()
     
 def get_db_connection():
 
@@ -46,9 +49,6 @@ def get_db_connection():
     db_string = h_URI
     engine = create_engine(db_string) 
     
-    #Create Tables
-    analyze.initialize_table()
-
     return conn
 
 @app.route("/", methods =["GET", "POST"])
