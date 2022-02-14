@@ -45,6 +45,9 @@ def get_db_connection():
     
     db_string = h_URI
     engine = create_engine(db_string) 
+    
+    #Create Tables
+    analyze.initialize_table()
 
     return conn
 

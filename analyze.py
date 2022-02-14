@@ -216,7 +216,7 @@ def initialize_table():
 
     # Create initial table
     cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS predicted_price (predictedprice FLOAT); INSERT INTO predicted_price (predictedprice) VALUES (1.1)")
+    cur.execute("CREATE TABLE IF NOT EXISTS predicted_price (predictedprice FLOAT); INSERT INTO predicted_price (predictedprice) VALUES (111)")
 
     return None
 
