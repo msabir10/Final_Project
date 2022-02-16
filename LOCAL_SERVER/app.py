@@ -7,7 +7,7 @@ import sqlalchemy
 from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
-from config import postgres_pass, heroku_pass, heroku_URI
+from config import postgres_pass #, heroku_pass, heroku_URI
 import analyze
 import yfinance as yf
 from boto.s3.connection import S3Connection
@@ -21,7 +21,7 @@ from boto.s3.connection import S3Connection
 #heroku_URI = os.environ['heroku_URI']
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = heroku_URI
+#app.config['SQLALCHEMY_DATABASE_URI'] = heroku_URI
 db = SQLAlchemy(app)
     
 def get_db_connection():
@@ -39,7 +39,7 @@ def get_db_connection():
     conn = psycopg2.connect(host=l_host, port = 5432, database=l_database, user=l_user, password=l_password)
 
     db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
-    h_URI = heroku_URI
+    #h_URI = heroku_URI
     
     #db_string = h_URI
     engine = create_engine(db_string) 
@@ -55,7 +55,7 @@ def index():
     
     conn = get_db_connection()
     db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
-    h_URI = heroku_URI
+    #h_URI = heroku_URI
     
     #db_string = h_URI
     engine = create_engine(db_string) 
