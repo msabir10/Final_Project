@@ -66,7 +66,7 @@ def index():
     
     pred_price = pd.read_sql("select * from \"predicted_price\"", conn)
 
-    predicted_price = int(pred_price['predictedprice'])
+    predicted_price = float(pred_price['predictedprice'])
     
     #cur.execute("SELECT * from ticker;")
     #ticker = cur.fetchall()
@@ -74,7 +74,7 @@ def index():
     ticker = pd.read_sql("select * from \"ticker\"", conn)
 
     business_summary = ticker['longbusinesssummary'][0]
-    current_price = int(ticker['regularmarketprice'])
+    current_price = float(ticker['regularmarketprice'])
     tik = ticker['shortname'][0]
     rec = analyze.recommendation(current_price, predicted_price)
     cur.close()
