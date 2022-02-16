@@ -73,9 +73,9 @@ def index():
     
     ticker = pd.read_sql("select * from \"ticker\"", conn)
 
-    business_summary = ticker['longbusinesssummary']
+    business_summary = ticker['longbusinesssummary'][0]
     current_price = int(ticker['regularmarketprice'])
-    tik = ticker['shortname']
+    tik = ticker['shortname'][0]
     rec = analyze.recommendation(current_price, predicted_price)
     cur.close()
     conn.close()
