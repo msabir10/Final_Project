@@ -207,6 +207,10 @@ def initialize_table():
     tick_df = tick_df[1:] 
     tick_df.columns = new_header
 
+    # Flatten the Table
+    tick_df.reset_index(inplace=True)
+    tick_df.dropna(axis=1, how='all')
+    
     #Selected Ticker to Postgres
     tick_df.to_sql(name='ticker', con=engine, if_exists='replace')
 
@@ -267,6 +271,10 @@ def data_predict(ticker):
     new_header
     tick_df = tick_df[1:] 
     tick_df.columns = new_header
+
+    # Flatten the Table
+    tick_df.reset_index(inplace=True)
+    tick_df.dropna(axis=1, how='all')
 
     #Selected Ticker to Postgres
     tick_df.to_sql(name='ticker', con=engine, if_exists='replace')
