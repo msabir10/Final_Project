@@ -52,6 +52,9 @@ def data_etl():
     df.to_csv('Resources/clean_data.csv', index=False)
     #return None
 
+    path='../Resources/Yahoo-Finance-Ticker-Symbols'
+    symbols_df = pd.read_csv(path, index_col=False)
+
 def data_analysis():
     # Import dependencies
     from sklearn.model_selection import train_test_split
