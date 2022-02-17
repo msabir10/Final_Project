@@ -7,7 +7,7 @@ import sqlalchemy
 from sqlalchemy import create_engine
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
-from config import postgres_pass #, heroku_pass, heroku_URI
+from config import postgres_pass#, heroku_pass, heroku_URI
 import analyze
 import yfinance as yf
 from boto.s3.connection import S3Connection
@@ -61,21 +61,15 @@ def index():
     engine = create_engine(db_string) 
     cur = conn.cursor()
     
-    #cur.execute("SELECT * from predicted_price;")
-    #predicted_price = cur.fetchall()
+    cur.execute("SELECT * from predicted_price;")
+    predicted_price = cur.fetchall()
+    predicted_price = list(predicted_price)[0][0]
     
-    pred_price = pd.read_sql("select * from \"predicted_price\"", conn)
-
-    predicted_price = int(pred_price['predictedprice'])
-    
-    #cur.execute("SELECT * from ticker;")
-    #ticker = cur.fetchall()
-    
-    ticker = pd.read_sql("select * from \"ticker\"", conn)
-
-    business_summary = ticker['longbusinesssummary'][0]
-    current_price = int(ticker['regularmarketprice'])
-    tik = ticker['shortname'][0]
+    cur.execute("SELECT * from ticker;")
+    ticker = cur.fetchall()
+    business_summary = ticker[0][4]
+    current_price = ticker[0][150]
+    tik = ticker[0][52]
     rec = analyze.recommendation(current_price, predicted_price)
     cur.close()
     conn.close()
