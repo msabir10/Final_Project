@@ -1,2 +1,6 @@
-postgres_pass = "pakistan"
-api_key = "mZZx23fonl6rCLgaPuWgL6NDBFgzgxI82V8cyXlN"
+api_key = 'wSJ1kqrUEJ6Bcdml8wAueaQ9faersjIn4BiLILtB'
+postgres_pass='GIHpmg12'
+heroku_pass = '5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14'
+heroku_URI = 'postgresql://qneoyqliwppucg:5529db771b78b297270b333ee6f96f37be1d329e1fc5d9d0891f621c69ae0f14@ec2-18-235-114-62.compute-1.amazonaws.com:5432/d9j5jmck4g9so5'
+heroku_database = 'd9j5jmck4g9so5'
+heroku_user = 'qneoyqliwppucg'
