@@ -1,6 +1,7 @@
 # Final_Project
 
 Presentation Link: https://docs.google.com/presentation/d/1DhafRC4UR8gYSsYWFzmQp2ccarPR_o2Tjhe-K0d2gU8/edit?usp=sharing
+
 Dashboard Presentation: https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
 
 ## Collaborators 
@@ -61,11 +62,14 @@ The team meets at least 3 times per week: Tuesday, Thursday, and Saturday using 
 
 ## Database
 
-- A database was created using postgreSQL
+A databased was created using PostgreSQL.
 
-    ![](database/provisional_database_v1.PNG)
+![](database/database_flow.png)
 
-- The machine learning module is connected to the database.
+**ERD**
+
+![](database/Database_ERD_v3.png)
+
 
 ## Machine Learning Model
 
