@@ -7,6 +7,10 @@ from config import api_key, postgres_pass#, heroku_pass, heroku_URI
 import yfinance as yf
 import psycopg2
 from sqlalchemy import create_engine
+from sklearn.preprocessing import StandardScaler
+import joblib
+import tensorflow as tf
+import keras
 
 #from boto.s3.connection import S3Connection
 
@@ -18,160 +22,8 @@ from sqlalchemy import create_engine
 #h_password = os.environ['heroku_pass'] #bbb.get_key('heroku_pass')
 #heroku_URI = os.environ['heroku_URI']
 
-def data_etl():
-    # Read the raw data
-    path='Resources/key_stats_yahoo.csv'
-    df = pd.read_csv(path, index_col=False)
-
-    df = df.drop(columns=['Unnamed: 0'])
-
-    #Ticker Array
-    tickers = df['Ticker'].unique()
-
-    #List of number columns
-    num_col = df.dtypes[df.dtypes == 'float64'].index.tolist()
-
-    #Replace NaN with Mean
-    for ticker in tickers:
-        m = df[df['Ticker'] == ticker][num_col].mean()
-        mask = df[df['Ticker'] == ticker]
-        mask[num_col] = mask[num_col].fillna(value = m)
-        df[df['Ticker'] == ticker] = mask
-
-    #drop remaining Nans
-    df.dropna(axis = 'rows', how='any',inplace=True)
-
-    #Remove outliers
-    #from scipy import stats
-    for i in num_col:
-        df = df[np.abs(df[i]-df[i].mean()) <= (3*df[i].std())]
-
-    df = df[df['Price']<10000]
-
-    #export clean data
-    df.to_csv('Resources/clean_data.csv', index=False)
-    #return None
-
-def data_analysis():
-    # Import dependencies
-    from sklearn.model_selection import train_test_split
-    from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
-    import pandas as pd
-    import tensorflow as tf
-    #turn off the warnings
-    import warnings
-    warnings.filterwarnings('ignore')
-
-    # Import checkpoint dependencies
-    import os
-    from tensorflow.keras.callbacks import ModelCheckpoint
-    from sklearn.ensemble import RandomForestRegressor
-    from sklearn.ensemble import GradientBoostingClassifier
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
-    from sklearn.metrics import mean_absolute_error
-    import sklearn
-    import matplotlib.pyplot as plt
-
-    #import clean data
-    cdf0 = pd.read_csv('Resources/clean_data.csv')
-
-    cdf = cdf0.drop(columns = ['Date','Ticker',#'DE Ratio',
-    #'Trailing P/E',
-    'Price/Sales',
-    'Price/Book',
-    'Profit Margin',
-    'Operating Margin',
-    #'Return on Assets',
-    #'Return on Equity',
-    'Revenue Per Share',
-    'Market Cap',
-    'Enterprise Value',
-    #'Forward P/E',
-    #'PEG Ratio',
-    'Enterprise Value/Revenue',
-    #'Enterprise Value/EBITDA',
-    'Revenue',
-    'Gross Profit',
-    'EBITDA',
-    'Net Income Avl to Common ',
-    'Diluted EPS',
-    #'Earnings Growth',
-    'Revenue Growth',
-    'Total Cash',
-    'Total Cash Per Share',
-    'Total Debt',
-    'Current Ratio',
-    'Book Value Per Share',
-    'Cash Flow',
-    'Beta'
-                         ])
-    active_col = cdf.columns.to_list()
-
-    # Split our preprocessed data into our features and target arrays
-    y = cdf["Price"].values
-    X = cdf.drop(["Price"],1).values
-
-    # Split the preprocessed data into a training and testing dataset
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
-
-    # Create a StandardScaler instances
-    scaler = StandardScaler()
-
-    # Fit the StandardScaler
-    X_scaler = scaler.fit(X_train)
-
-    # Scale the data
-    X_train_scaled = X_scaler.transform(X_train)
-    X_test_scaled = X_scaler.transform(X_test)
-    X_train_scaled
-
-    # Define the model - deep neural net, i.e., the number of input features and hidden nodes for each layer.
-    number_input_features = len(X_train_scaled[0])
-    hidden_nodes_layer1 = 80
-    hidden_nodes_layer2 = 30
-    hidden_nodes_layer3 = 10
-
-    nn = tf.keras.models.Sequential()
-
-    # First hidden layer
-    nn.add(tf.keras.layers.Dense(units=hidden_nodes_layer1, input_dim=number_input_features, activation="relu"))
-
-    # Second hidden layer
-    nn.add(tf.keras.layers.Dense(units=hidden_nodes_layer2, activation="selu"))
-
-    # Third hidden layer
-    nn.add(tf.keras.layers.Dense(units=hidden_nodes_layer3, activation="selu"))
-
-    # Output layer
-    nn.add(tf.keras.layers.Dense(units=1, activation="selu"))
-
-    train_size = len(X_train_scaled)
-
-    batch_size = 32
-    steps_per_epoch = train_size / batch_size
-    save_period = 5
-    save_freq = int(save_period * steps_per_epoch)
-
-    # Compile the model
-    nn.compile(loss="mean_absolute_error", optimizer="adam")
-
-    # Train the model
-    fit_model = nn.fit(X_train_scaled, y_train, epochs=50, batch_size = batch_size)
-
-    #pred = X_test[:100]
-    #pred = pred.reshape(-1,cdf.shape[1]-1)
-    #pred.shape
-
-    # Export the model to HDF5 file
-    nn.save("Model/Stock_Optimization.h5")
-    #return None
-
 def initialize_table():
-    import psycopg2
-    import pandas as pd
-    from sqlalchemy import create_engine
-    from config import postgres_pass
+
     #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     #h_database = heroku_database
     #h_user = heroku_user
@@ -195,36 +47,52 @@ def initialize_table():
 
     # pull Ticker details from Yahoo Finance
     ticker_dict = yf.Ticker(ticker)
+
+    #test if Ticker is real, if not -> display ADBE
+    if len(ticker_dict.info.keys())<5:
+        ticker_dict = yf.Ticker('adbe')
+    
     t_info = ticker_dict.info
 
-    # Get Ticker Features
+    # Get Ticker Features and lower case for column names
     tick_df = pd.DataFrame(list(t_info.items()))
     tick_df = tick_df.transpose()
     new_header = tick_df.iloc[0] 
+
     for i in range(len(new_header)):
         new_header[i] = new_header[i].lower()
-    new_header
+    #new_header
     tick_df = tick_df[1:] 
     tick_df.columns = new_header
 
+    tick_df['symbol'] = tick_df['symbol'].str.lower()
+    tick_df.symbol
+
     #Selected Ticker to Postgres
-    tick_df.to_sql(name='ticker', con=engine, if_exists='replace')
+    tick_df.to_sql(name='tickerr', con=engine, if_exists='replace')
 
     # Create initial table
     cur = conn.cursor()
-    cur.execute("CREATE TABLE IF NOT EXISTS predicted_price (predictedprice FLOAT); INSERT INTO predicted_price (predictedprice) VALUES (1.1)")
+    cur.execute("""CREATE TABLE IF NOT EXISTS predicted_price (predictedprice FLOAT, accuracy VARCHAR);""")
+    cur.execute("""INSERT INTO predicted_price (predictedprice, accuracy) VALUES (1.1, 'High');""")
+    conn.commit()
+
+    # Create a DF for the Symbol Name Table (CSV)
+    class_df=pd.read_csv('ticker_clusters.csv', index_col=False, names=['tick', 'class'], header=0)
+    # Create a new Table for Clusters in Posgres
+    class_df.to_sql(name='clusters', con=engine, if_exists='replace', index=False)
+
+    # Create ticker Table
+    cur = conn.cursor()
+    cur.execute("DROP TABLE IF EXISTS ticker;")
+    cur.execute("SELECT t.*, c.class INTO ticker FROM tickerr t LEFT JOIN clusters c ON t.symbol = c.tick;") 
+    conn.commit()
 
     return None
 
 def data_predict(ticker):
 
     #Connect to PostgreSQL
-    import pandas as pd
-    import psycopg2
-    import tensorflow as tf
-    from sklearn.preprocessing import StandardScaler,OneHotEncoder, MinMaxScaler
-    from sqlalchemy import create_engine
-    from config import postgres_pass
     
     #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     #h_database = heroku_database
@@ -244,68 +112,96 @@ def data_predict(ticker):
     #db_string = h_URI
     engine = create_engine(db_string) 
 
-    # Move the Cleaned data to Postgres
-    #cdf.to_sql(name='clean_data', con=engine, if_exists='replace') #### Check where to move ######
-
-    # Select Ticker
-    #ticker = 'adbe'
-
-    #Call Yahoo Finance API
-    #endpoint = "/v8/finance/quoteSummary/"
-    #url = "https://yfapi.net" + endpoint + ticker
-
     # pull Ticker details from Yahoo Finance
     ticker_dict = yf.Ticker(ticker)
+
+    #test if Ticker is real, if not -> display ADBE
+    if len(ticker_dict.info.keys())<5:
+        ticker_dict = yf.Ticker('adbe')
+        
     t_info = ticker_dict.info
 
-    # Get Ticker Features
+    # Get Ticker Features and lower case for column names
     tick_df = pd.DataFrame(list(t_info.items()))
     tick_df = tick_df.transpose()
     new_header = tick_df.iloc[0] 
+
     for i in range(len(new_header)):
         new_header[i] = new_header[i].lower()
-    new_header
+    #new_header
     tick_df = tick_df[1:] 
     tick_df.columns = new_header
 
-    #Selected Ticker to Postgres
-    tick_df.to_sql(name='ticker', con=engine, if_exists='replace')
+    tick_df['symbol'] = tick_df['symbol'].str.lower()
+    tick_df.symbol
 
-    # Create a cursor object
+    #Selected Ticker to Postgres
+    tick_df.to_sql(name='tickerr', con=engine, if_exists='replace')
+
+    #Query the Feature data for Clusters Table
     cur = conn.cursor()
+    cur.execute("DROP TABLE IF EXISTS ticker;")
+    cur.execute("SELECT t.*, c.class INTO ticker FROM tickerr t LEFT JOIN clusters c ON t.symbol = c.tick;") 
+    conn.commit()
 
     #Query the Feature data for DL Model
-    cur.execute("""SELECT 
-    trailingPE, returnOnAssets, returnOnEquity, forwardPE, pegRatio, enterpriseToEbitda, earningsGrowth
+    cur.execute("""SELECT debttoequity, trailingpe, pricetosalestrailing12months, 
+    pricetobook, profitmargins, operatingmargins, returnonassets, returnonequity, 
+    revenuepershare, forwardpe, pegratio, enterprisetorevenue, enterprisetoebitda, 
+    grossprofits, forwardeps, earningsgrowth, revenuegrowth, totalcashpershare, 
+    currentratio, bookvalue, operatingcashflow, beta, class
     FROM ticker;""")      
 
     query_results = list(np.asarray(cur.fetchall()[0]))
 
-    #Remove None values received from Yahoo Finance 
-    for i in range(len(query_results)):
+    # Remove Nulls from Yahoo Finance Data
+    for i in range(len(query_results)-1):
         if query_results[i] == None:
             query_results[i] =0
-    
+        if i == len(query_results)-1:
+            if query_results[i+1] == None:
+                query_results[i+1] =6 # If the stock does not belong to any cluster
+        
 
     # Load the Saved Model
     from tensorflow import keras
-    nn = keras.models.load_model("Model/Stock_Optimization.h5")
+    try:
+        model_num = int(query_results[-1]) # Get the Model Class Number
+    except:
+        #if the stock is not in clusters
+        model_num = 6
+
+    query_results = query_results[:-1]
+
+    nn = keras.models.load_model(f"Model/Stock_Optimization_Class_{model_num}.h5")
+
+    #Accuracy Calc
+    if model_num == 0:
+        model_accuracy = 'Medium'
+    elif model_num == 1:
+        model_accuracy = 'Medium'
+    elif model_num == 2:
+        model_accuracy = 'High'
+    elif model_num == 3:
+        model_accuracy = 'Very High'
+    elif model_num == 4:
+        model_accuracy = 'Medium'
+    elif model_num == 5:
+        model_accuracy = 'Medium'
+    else:
+        model_accuracy = 'Medium'
 
     # Run the model to predict Stock Price
     query_results = np.array(query_results).reshape(-1,1)
     query_results = query_results.transpose()
-    #query_results.shape
+    query_results.shape
 
-    # Create a StandardScaler instances
-    #scaler = StandardScaler()
+    # Load the Scaler
+    X_scaler = joblib.load(f'Model/Stock_Scaler_Class_{model_num}.gz')
+    query_scaled = X_scaler.transform(query_results) 
 
-    # Fit the StandardScaler
-    #X_scaler = scaler.fit(query_results)
-
-    # Scale the data
-    #Q_R_scaled = X_scaler.transform(query_results)
-    
-    predicted_price = pd.DataFrame(data=nn.predict(query_results), columns=['predictedprice'], index=None)
+    predicted_price = pd.DataFrame(data=nn.predict(query_scaled), columns=['predictedprice'], index=None)
+    predicted_price['accuracy'] = model_accuracy
 
     #Save Predicted Price to Postgres
     #Selected Ticker to Postgres
@@ -320,15 +216,16 @@ def data_predict(ticker):
 def recommendation(cp, pp):
     if pp/cp>1.5:
         rec = "Strong Buy"
-    elif pp/cp>1:
+    elif pp/cp>1.1:
         rec = "Buy"
+    elif pp/cp>0.9:
+        rec = "Hold"
     else:
         rec = "Sell"
     return rec
 
 def run_all(ticker):
-    #data_etl()
-    #data_analysis()
+
     initialize_table()
     data_predict(ticker)
     return None

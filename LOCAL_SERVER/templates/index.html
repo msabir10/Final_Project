@@ -5,12 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Return Maximizer</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-  <script type="module">
+    
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <script type="module">
+    
     import * as d3 from "https://cdn.skypack.dev/d3@7";
     const div = d3.selectAll("div");
     </script>
@@ -44,67 +50,58 @@
       name = document.getElementById('dayLow');
       name.innerHTML = json.dayLow;
   }
-</script>
+  </script>
 </head>
+
 <body>
-    <div class="container-fluid">
-        <!-- Add Jumbotron to Header -->
-        <div class="jumbotron text-center" style="background-image: url(https://learnmarketonline.com/wp-content/uploads/2018/04/largest-forex-brokers.jpg); background-size: 100%;">
-          <h1 style ="color:aliceblue"> Stock Return Maximizer</h1>
-          <!-- Add a button to activate scraping script -->
-          <form action="{{ url_for('analyzer')}}" method="post">
-            <p style=color:white> <label for="ticker" color="white">Stock Ticker:</label></p>
-           
-            <div class="container">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control"  name="inputticker" id="tick" placeholder="Ticker" aria-label="Recipient's username" aria-describedby="button-addon2">
-              <button type='submit' href="/analyze" type="button" id="button-addon2">Analyze</button>
-            </div>
-          </div>
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1 style ="color:aliceblue"> Stock Return Maximizer</h1>
+      <!-- Add a button to activate scraping script -->
+      <form action="{{url_for('analyzer')}}" method="post">
+        <p style=color:white> <label for="ticker" color="white">Stock Ticker:</label></p>
+        <input type="text" id="tick" name="inputticker" placeholder="Enter Stock Ticker">
+      <button type='submit' href="/analyze">Analyze</button>
+    </div>
 
-       <hr>
-       <hr>
-       <hr>
-        </div>
-        
+    <div class="row" id="first">
+      <div class="col-md-1"> 
+      </div> 
+
+      <div class="col-md-4">
+            <h6>Company Name:</h6>
+            <h6>Predicted Price of the Stock:</h6>
+            <h6>Expected Prediction Accuracy:</h6>
+            <h6>Current Price of the Stock:</h6>
+      </div>  
+
+      <div class="col-md-4">
+            <h6>{{tk}}</h6>
+            <h6>$ {{pp}}</h6>
+            <h6>{{pa}}</h6>
+            <h6>$ {{cp}}</h6>
+      </div>
+
+      <div class="col-md-3">
         <div class="container">
-          <table class="table table-dark">
-          
-            <tbody>
-              <tr>
-                
-                <td class="text-start">Stock Ticker</td>
-                <td>{{tk}}</td>
-              </tr>
-              <tr>
-                
-                <td class="text-start">Predicted Price of the stock</td>
-                <td>{{pp}} </td>
-              </tr>
-              <tr>
-              
-                <td class="text-start">Current Price of the stock</td>
-                <td>{{cp}}</td>
-              </tr>
+          <h3 class="d-block btn btn-success">Recommendation</h3>
+        <h2 class="text-center">{{rec}}  </h2>
+      </div>
 
-            </tbody>
-          </table>
-          <div class="container">
-            <h3 class="d-block btn btn-success">Recommendation</h3>
-          <p class="text-center">{{rec}}  </p></div>
-          <div>
-            <h3 class="d-block btn btn-success">Business Summary</h3>
-            <p class="text-center">{{bs}} </p>
-          </div>
+    </div>
   </div>
     
-  <body>
-    <div class="container">
-        <div class="row">
-            <div class="col text-light bg-dark" style="margin:10px 0px 10px 0px">
-                <h1 style="padding:10px 0px 10px 0px">Stock Price Chart</h1>
-            </div>
+
+          <div class="container-fluid">
+            <h3 class="col text-light bg-dark text-center">Business Summary</h3>
+            <p class="sectionbar">{{bs}} </p>
+          </div>
+  
+        <div class="container-fluid">
+            <h3 class="col text-light bg-dark text-center">Stock Price Chart</h3>
         </div>
+
+        <div class="container-fluid" id="chartpad">
         <div class="row">
             <div class="col"><b>Select stock</b></div>
             <div class="col">
@@ -169,6 +166,7 @@
             </div>    
         </div>
     </div>
+ 
 
     <script>callback();</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

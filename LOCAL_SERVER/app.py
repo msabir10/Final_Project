@@ -55,26 +55,31 @@ def index():
     
     conn = get_db_connection()
     db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    
     #h_URI = heroku_URI
-    
     #db_string = h_URI
-    engine = create_engine(db_string) 
-    cur = conn.cursor()
-    
-    cur.execute("SELECT * from predicted_price;")
-    predicted_price = cur.fetchall()
-    predicted_price = list(predicted_price)[0][0]
-    
-    cur.execute("SELECT * from ticker;")
-    ticker = cur.fetchall()
-    business_summary = ticker[0][4]
-    current_price = ticker[0][150]
-    tik = ticker[0][52]
+
+    #engine = create_engine(db_string) 
+    #cur = conn.cursor()
+    predicted_price_df = pd.read_sql_table('predicted_price', db_string)
+    #cur.execute("SELECT * from predicted_price;")
+    #predicted_price = cur.fetchall()
+    predicted_price = float(predicted_price_df.predictedprice)
+    predicted_accuracy = predicted_price_df.accuracy[0]
+
+    ticker_df = pd.read_sql_table('ticker', db_string)
+
+    #cur.execute("SELECT * from ticker;")
+    #ticker = cur.fetchall()
+    business_summary = ticker_df.longbusinesssummary[0]
+    current_price = float(ticker_df.regularmarketprice)
+    tik = ticker_df.shortname[0]
+
     rec = analyze.recommendation(current_price, predicted_price)
-    cur.close()
+    #cur.close()
     conn.close()
 
-    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec)
+    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec, pa=predicted_accuracy)
 
 @app.route("/analyze", methods =["GET", "POST"])
 def analyzer():
