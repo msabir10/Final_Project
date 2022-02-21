@@ -148,13 +148,13 @@ Adjusted R-Square has been used to evaluate the each Model accuracy.
 
 The R-Square results are below.
 
-Model 0: 0.34
-Model 1: 0.23
-Model 2: 0.71
-Model 3: 0.99
-Model 4: 0.37
-Model 5: 0.62
-Model 6: 0.33
+1. Model 0: 0.34
+2. Model 1: 0.23
+3. Model 2: 0.71
+4. Model 3: 0.99
+5. Model 4: 0.37
+6. Model 5: 0.62
+7. Model 6: 0.33
 
 ### Overall User Experience
 
