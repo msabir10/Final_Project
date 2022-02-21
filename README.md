@@ -6,7 +6,7 @@ Dashboard Presentation: https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM
 
 ## Collaborators 
 
-The team (**Lydia Alexander**,**Muhammad Sabir**, and **Lev Levine**) has made the decision to collaborate on this project working on and submitting each area as a team.
+The team (**Lydia Alexander**, **Muhammad Sabir**, and **Lev Levine**) has made the decision to collaborate on this project working on and submitting each area as a team.
 
 ## Overview
 
@@ -75,20 +75,34 @@ A databased was created using PostgreSQL.
 
 ### Model Overview 
 
-A provisional Deep Learning Regression Model has been developed (see **Yahoo_Finance.ipynb**)
+A provisional Deep Learning Regression Model has been developed (see **LOCAL_SERVER/ML_Model.ipynb**)
 
 Target Variable: **Stock Price** (Price)
 
 Initial Feature Variables: 
 
-- **Price per Earnings** (Trailing P/E) 
-- **Earnings per Share** (Diluted EPS)
-- **Return on Assets** (Return on Assets)
-- **Return on Equity** (Return on Equity)
-- **Price per Earnings** (Forward P/E)
-- **Price/Earnings to growth Ratio** (PEG Ratio)
-- **Enterprise Value/Earning Before Interest and Taxes, Depreciation, and Amortization** (Enterprise Value/EBITDA)
-- **Earnings Growth** (Earnings Growth)
+- DE Ratio                    float64
+- Trailing P/E                float64
+- Price/Sales                 float64
+- Price/Book                  float64
+- Profit Margin               float64
+- Operating Margin            float64
+- Return on Assets            float64
+- Return on Equity            float64
+- Revenue Per Share           float64
+- Forward P/E                 float64
+- PEG Ratio                   float64
+- Enterprise Value/Revenue    float64
+- Enterprise Value/EBITDA     float64
+- Gross Profit                float64
+- Diluted EPS                 float64
+- Earnings Growth             float64
+- Revenue Growth              float64
+- Total Cash Per Share        float64
+- Current Ratio               float64
+- Book Value Per Share        float64
+- Cash Flow                   float64
+- Beta                        float64
 
 The model is using the **3 hidden layers**:
 
@@ -104,7 +118,7 @@ The **RELU** activation function is used on all the **Output layer**.
 
 ![Model](Resources/model_screen.png)
 
-The initial model is run **50 epochs** to train and is generating **Loss: 14.63**
+The model is run **100 epochs** to train.
 
 ### Data preprosessing
 
@@ -114,11 +128,33 @@ The initial model is run **50 epochs** to train and is generating **Loss: 14.63*
 - Removed rows with outliers beyong 2 standard deviation from the mean
 - Scaled the training data to Mean = 0 and STD = 1 (with Standard Scaler)
 
-### Deep Learning Model Optimization Next Steps
+### Data Transformation
 
-- Attempt to cluster the stocks into several categories with unsupervised ML 
-- Develop and fit DL models for each cluster individually 
-- Experienemt with activation functions, number of hidden layers, model feature selection, number of epochs, etc
+- An unsupervised machine learning model has been applied to the cleaned dataset to cluster the data into groups with similar behavioral patterns. K-Means model has been used and the Elbow Curve built.
+
+![Elbow Curve](Resources/Elbow.png)
+
+Based on the Elbow Curve, **k=6** has been selected. We have assigned a **Cluster Class** to each Stock Ticker in the dataset accordingly.
+
+### Model Training and Saving
+
+For each Cluster, a unique Deep Learning Model has been trained based on the Cluster data subset. The Models for each Cluster have been saved (total of 6). The Scalers for each Cluster have been saved (total of 6).
+
+For new stock tickers that are not part of the overall dataset and may be potentially entered by the App users, a 7th model has been trained. The 7th model is based on the overall dateset (without clustering). Both, the model and scaler have also been saved.
+
+### Model Evaluation
+
+Adjusted R-Square has been used to evaluate the each Model accuracy. 
+
+The R-Square results are below.
+
+Model 0: 0.34
+Model 1: 0.23
+Model 2: 0.71
+Model 3: 0.99
+Model 4: 0.37
+Model 5: 0.62
+Model 6: 0.33
 
 ### Overall User Experience
 
@@ -127,21 +163,13 @@ The initial model is run **50 epochs** to train and is generating **Loss: 14.63*
 1. Enter stock ticker
 2. The backend will pull the most recent feature data and target variable data from Yahoo Finance
 3. The DL Model will calculate the predicted stock price base on the most current feature data
-4. The predicted and current stock price will be displayed for the user
+4. The predicted and current stock price are displayed for the user
 5. If predicted stock price > current stock price, a BUY recommendation generated and vise versa
 
-**The working prototype User Interface:**
+**The working Prototype 2.0 User Interface (localhost deployment):**
 
-![App](Resources/stockoptimizer_screen.png)
+![App](Resources/screen2.png)
 
-#### B. Discover investment opportunity stocks (Optional Feature)
-
-1. Click the "Analyze the Market" button
-2. Pull the current feature data and target variable data for all the tickers in the array (>300)
-3. Run the DL model to predict prices for each stock
-4. Display predicted and current prices sorted in the descending order of the investment opportunity
-5. Provide a recommendation on which stocks to invest
-
-### Prototype App Deployment on HEROKU
+### Prototype 1.0 App Deployment on HEROKU (to be updated)
 
 [https://stockoptimizer.herokuapp.com/](https://stockoptimizer.herokuapp.com/)
