@@ -15,11 +15,11 @@
     <script>
         async function callback() {
             let Stock = document.getElementById('stock').value;
-            let Period = document.getElementById('period').value;
-            let Interval = document.getElementById('interval').value;
+            // let Period = document.getElementById('period').value;
+            // let Interval = document.getElementById('interval').value;
             //alert(Stock+Period+Interval);
             //return;
-            let response = await fetch("/callback/getStock?data=" + Stock + "&period=" + Period + "&interval=" + Interval);
+            let response = await fetch("/callback/getStock?data=" + Stock + "&period=" +"1y" + "&interval="+ "1d" );
             if (response.ok) {
                 let chartJson = await response.json();
                 if (response.ok) {
@@ -43,17 +43,21 @@
             name.innerHTML = json.dayHigh;
             name = document.getElementById('dayLow');
             name.innerHTML = json.dayLow;
+            name = document.getElementById('fiftyTwoWeekHigh');
+            name.innerHTML = json.fiftyTwoWeekHigh;
+            name = document.getElementById('fiftyTwoWeekLow');
+            name.innerHTML = json.fiftyTwoWeekLow;
         }
     </script>
 </head>
 
 <body>
 
-    <div class="container-fluid">
+    <!-- <div class="container-fluid"> -->
         <!-- Add Jumbotron to Header -->
-        <div class="jumbotron text-center" style="background-image: url(https://learnmarketonline.com/wp-content/uploads/2018/04/largest-forex-brokers.jpg); background-size: 50%;">
+        <!-- <div class="jumbotron text-center" style="background-image: url(https://learnmarketonline.com/wp-content/uploads/2018/04/largest-forex-brokers.jpg); background-size: 50%;">
           <h1 style ="color:aliceblue"> Stock Return Maximizer</h1>
-        </div>
+        </div> -->
     
     <div class="container">
         <div class="row">
@@ -68,8 +72,8 @@
                 <input type="text"t id="stock" class="form-control" aria-label="Select" )>
                 </select>
             </div>
-            <div class="col"><b>for period</b></div>
 
+            <!-- <div class="col"><b>for period</b></div>
             <div class="col">
                 <select id="period" class="form-select" aria-label="Select" )>
                     <option selected value="1d">1 day</option>
@@ -85,8 +89,8 @@
                     <option value="max">Max</option>
                 </select>
             </div>
-            <div class="col"><b>Interval</b></div>
 
+            <div class="col"><b>Interval</b></div>
             <div class="col">
                 <select id="interval" class="form-select" aria-label="Select" )>
                     <option selected value="1m">1 minute</option>
@@ -100,19 +104,20 @@
                     <option value="1w">1 week</option>
                     <option value="1m">1 month</option>
                     <option value="3m">3 months</option>
-
                 </select>
-            </div>
+            </div> -->
             <div class="col">
                 <button type="button" class="btn btn-primary" onclick="callback()">Fetch stock</button>
             </div>
-            <div class="w-100" style="padding:10px;text-align:right;font-size: small;"><i>Note: not all intervals are
-                    valid for all periods</i></div>
+            <!-- <div class="w-100" style="padding:10px;text-align:right;font-size: small;"><i>Note: not all intervals are
+                    valid for all periods</i></div> -->
 
             <div class="col-3"><p><b>Stock info</b></p>
                 <p>Symbol: <span id="symbol">N/A</span></p>
                 <p>Day High: <span id="dayHigh">N/A</span></p>
                 <p>Day Low: <span id="dayLow">N/A</span></p>
+                <p>52 Week High: <span id="fiftyTwoWeekHigh">N/A</span></p>
+                <p>52 Week Low: <span id="fiftyTwoWeekLow">N/A</span></p>
 
                 
             </div>
