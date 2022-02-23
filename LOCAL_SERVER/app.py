@@ -128,6 +128,12 @@ def index():
     business_summary = ticker_df.longbusinesssummary[0]
     current_price = float(ticker_df.regularmarketprice)
     tik = ticker_df.shortname[0]
+    
+    sm = ticker_df.symbol[0].upper()
+    w52_high = ticker_df.fiftytwoweekhigh[0]
+    w52_low = ticker_df.fiftytwoweeklow[0]
+    day_high = ticker_df.dayhigh[0]
+    day_low = ticker_df.daylow[0]
 
     rec = analyze.recommendation(current_price, predicted_price)
     #cur.close()
@@ -136,7 +142,8 @@ def index():
 
     conn.close()
 
-    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec, pa=predicted_accuracy, graphJSON = graphJSON)
+    symbol = ticker_df.symbol[0]
+    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec, pa=predicted_accuracy, graphJSON = graphJSON, sm = sm, w52_high = w52_high, w52_low = w52_low, day_high = day_high, day_low = day_low)
 
 @app.route("/analyze", methods =["GET", "POST"])
 def analyzer():

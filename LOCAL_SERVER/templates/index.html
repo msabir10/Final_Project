@@ -27,8 +27,8 @@
         <p style=color:white> <label for="ticker" color="white">Stock Ticker:</label></p>
         <input type="text" id="tick" name="inputticker" placeholder="Enter Stock Ticker">
       <button id='start' type='submit' href="/analyze">Analyze</button>
-    </div>
-    </div>
+        </div>
+        </div>
 
     <div class="row" id="first">
       <div class="col-md-1"> 
@@ -43,9 +43,9 @@
 
       <div class="col-md-4">
             <h6>{{tk}}</h6>
-            <h6>$ {{pp}}</h6>
+            <h6>$ <span id="pps"></span></h6>
             <h6>{{pa}}</h6>
-            <h6>$ {{cp}}</h6>
+            <h6>$ <span id="cps"></span></h6>
       </div>
 
       <div class="col-md-3">
@@ -54,28 +54,27 @@
         <h2 class="text-center">{{rec}}  </h2>
       </div>
 
+      </div>
     </div>
-  </div>
-    
-
-          <div class="container-fluid">
-            <h3 class="col text-light bg-dark text-center">Business Summary</h3>
-            <p class="sectionbar">{{bs}} </p>
-          </div>
   
-        <div class="container-fluid">
+    <div class="container-fluid">
             <h3 class="col text-light bg-dark text-center">Stock Price Chart</h3>
         </div>
 
-        <div class="container-fluid" id="chartpad">
+    <div class="container-fluid" id="chartpad">
         <div class="row">
           
-              <div class="col-3"><p><b>Stock info</b></p>
-                        <p>Symbol: {{tk}}</span></p>
-                        <p>Day High: <span id="dayHigh">N/A</span></p>
-                        <p>Day Low: <span id="dayLow">N/A</span></p>
-                        <p>52 Week High: <span id="fiftyTwoWeekHigh">N/A</span></p>
-                        <p>52 Week Low: <span id="fiftyTwoWeekLow">N/A</span></p>
+              <div class="col-3" id="first"><p><b>Stock Info</b></p>
+                    <hr size ="6">
+                        <p>Symbol: <b id="right_align">{{sm}}</b></p>
+                        <hr>
+                        <p>Day High: $ <b><span id="day_h"></span> </b></p>
+                        <hr>
+                        <p>Day Low: $ <b><span id="day_l"></span></b></p>
+                        <hr>
+                        <p>52 Week High: $ <b><span id="w52_h"></span></b></p>
+                        <hr>
+                        <p>52 Week Low: $ <b><span id="w52_l"></span></b></p>
                
                 </div>
                 <div class="col-9">
@@ -83,6 +82,10 @@
                     </div>
                 </div>   
         </div>
+        <div class="container-fluid">
+            <h3 class="col text-light bg-dark text-center">Business Summary</h3>
+            <p class="sectionbar">{{bs}} </p>
+          </div>
     </div>
     </div>
  
@@ -101,6 +104,14 @@
     <script type="text/javascript">
         var graphs = {{graphJSON | safe}};
         Plotly.plot('chart',graphs,{});
+
+        document.getElementById("day_h").innerHTML = {{day_high}}.toFixed(2);
+        document.getElementById("day_l").innerHTML = {{day_low}}.toFixed(2);
+        document.getElementById("w52_h").innerHTML = {{w52_high}}.toFixed(2);
+        document.getElementById("w52_l").innerHTML = {{w52_low}}.toFixed(2);
+        document.getElementById("pps").innerHTML = {{pp}}.toFixed(2);
+        document.getElementById("cps").innerHTML = {{cp}}.toFixed(2);
+
     </script>
 
 </html>
