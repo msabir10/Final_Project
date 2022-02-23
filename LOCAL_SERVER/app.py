@@ -132,11 +132,11 @@ def index():
     rec = analyze.recommendation(current_price, predicted_price)
     #cur.close()
 
-    graph = create_plot()
+    graphJSON = create_plot()
 
     conn.close()
 
-    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec, pa=predicted_accuracy, graph = graph)
+    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec, pa=predicted_accuracy, graphJSON = graphJSON)
 
 @app.route("/analyze", methods =["GET", "POST"])
 def analyzer():
