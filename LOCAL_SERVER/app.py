@@ -10,7 +10,10 @@ import psycopg2
 from config import postgres_pass#, heroku_pass, heroku_URI
 import analyze
 import yfinance as yf
+import plotly
+import plotly.express as px
 from boto.s3.connection import S3Connection
+import json
 
 #Heroku secret key config
 #s3 = S3Connection(os.environ['heroku_pass'], os.environ['heroku_URI'],os.environ['heroku_user'],os.environ['heroku_database'])
@@ -46,6 +49,57 @@ def get_db_connection():
 
     return conn
 
+def create_plot():
+
+    #Connect to PostgreSQL
+    
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_database = heroku_database
+    #h_user = heroku_user
+    #h_password = heroku_pass
+
+    l_host = 'localhost'
+    l_database = 'final_project'
+    l_user = 'postgres'
+    l_password = postgres_pass
+
+    conn = psycopg2.connect(host=l_host, port = 5432, database=l_database, user=l_user, password=l_password)
+
+    db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    #h_URI = heroku_URI
+    
+    #db_string = h_URI
+
+    ######## Chart in Python ############
+    #stock = pd.read_sql_table('ticker', db_string)
+    stock = pd.read_sql_table('ticker', db_string)
+    stock_ticker = stock.symbol[0]
+    st = yf.Ticker(stock_ticker)
+    period ='1y'
+    interval = '1d'
+    df = st.history(period=period, interval=interval)
+    #hist_df
+
+    # Graph formatting
+    df=df.reset_index()
+    df.columns = ['Date-Time']+list(df.columns[1:])
+    max = (df['Open'].max())
+    min = (df['Open'].min())
+    range = max - min
+    margin = range * 0.05
+    max = max + margin
+    min = min - margin
+    fig = px.area(df, x='Date-Time', y="Open",
+        hover_data=("Open","Close","Volume"), 
+        range_y=(min,max), template="seaborn" )
+
+    #fig.show()
+    # Create a JSON representation of the graph
+    #graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    #graph = graphJSON
+    return graphJSON
+
 @app.route("/", methods =["GET", "POST"])
 def index():
     
@@ -77,9 +131,12 @@ def index():
 
     rec = analyze.recommendation(current_price, predicted_price)
     #cur.close()
+
+    graph = create_plot()
+
     conn.close()
 
-    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec, pa=predicted_accuracy)
+    return render_template('index.html', cp=current_price, pp=predicted_price, bs=business_summary, tk=tik, rec = rec, pa=predicted_accuracy, graph = graph)
 
 @app.route("/analyze", methods =["GET", "POST"])
 def analyzer():
@@ -90,10 +147,10 @@ def analyzer():
     
     analyze.run_all(ticker)
     #rec = analyze.recommendation(current_price, predicted_price)
+    #graph = create_plot()
+
     return redirect('/', code=302)
 
-#cur.close()
-#conn.close()
     
 if __name__ == "__main__":
     app.run(debug= True)

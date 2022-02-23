@@ -213,6 +213,56 @@ def data_predict(ticker):
     conn.close()
     return None
 
+def create_plot():
+
+    #Connect to PostgreSQL
+    
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_database = heroku_database
+    #h_user = heroku_user
+    #h_password = heroku_pass
+
+    l_host = 'localhost'
+    l_database = 'final_project'
+    l_user = 'postgres'
+    l_password = postgres_pass
+
+    conn = psycopg2.connect(host=l_host, port = 5432, database=l_database, user=l_user, password=l_password)
+
+    db_string = f"postgresql://postgres:{postgres_pass}@127.0.0.1:5432/final_project"
+    #h_URI = heroku_URI
+    
+    #db_string = h_URI
+
+    ######## Chart in Python ############
+    stock = pd.read_sql_table('ticker', db_string)
+    stock_ticker = stock.symbol[0]
+    st = yf.Ticker(stock_ticker)
+    period ='1y'
+    interval = '1d'
+    df = st.history(period=period, interval=interval)
+    #hist_df
+
+    # Graph formatting
+    df=df.reset_index()
+    df.columns = ['Date-Time']+list(df.columns[1:])
+    max = (df['Open'].max())
+    min = (df['Open'].min())
+    range = max - min
+    margin = range * 0.05
+    max = max + margin
+    min = min - margin
+    fig = px.area(df, x='Date-Time', y="Open",
+        hover_data=("Open","Close","Volume"), 
+        range_y=(min,max), template="seaborn" )
+
+    #fig.show()
+    # Create a JSON representation of the graph
+    #graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    #graph = graphJSON
+    return graphJSON
+
 def recommendation(cp, pp):
     if pp/cp>1.5:
         rec = "Strong Buy"
@@ -228,6 +278,7 @@ def run_all(ticker):
 
     initialize_table()
     data_predict(ticker)
+    #create_plot()
     return None
 
 if __name__ == "__main__":

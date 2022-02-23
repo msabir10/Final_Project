@@ -114,6 +114,8 @@ The **SELU** activation function is used on all the **Hidden layers**.
 
 The **RELU** activation function is used on all the **Output layer**. 
 
+Since this is a regression analysis, RELU and SELU activation functions generate adequate results.
+
 **The Neural Network Model:**
 
 ![Model](Resources/model_screen.png)
