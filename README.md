@@ -144,7 +144,7 @@ The remaining data points have been used to train the machine learnign and neura
 
 ### Description of how data was split into training and testing sets
 
-The cleaned data set has been split into the trainign and testing data sets with the **train_test_split** method from the **sklearn.model_selection** library. The standard split is 75% of the data into the trainign set and 25% of the data into the testing set.
+The cleaned data set has been split into the trainign and testing data sets with the **train_test_split** method from the **sklearn.model_selection** library. The standard split is 75% of the data into the training set and 25% of the data into the testing set.
 
 ### Explanation of model choice, including limitations and benefits
 
