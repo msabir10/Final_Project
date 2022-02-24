@@ -184,7 +184,7 @@ Since this is a regression analysis, RELU and SELU activation functions generate
 
 **The Neural Network Model:**
 
-![Model](Resources/model_screen.png)
+![Model](Resources/model_white.png)
 
 The model is run **100 epochs** to train.
 
