@@ -160,7 +160,9 @@ The target variable is continiuos data, hence regression models have been chosen
 
 5. Random Forest
 
+Adjusted R-Square Method has been used to evaluate the model accuracy. The Random forest model has generated the best results out of the machine learnign models. 
 
+Then, we tried to run neural network models with various layers, number of neurons, activation function, and number of epochs. The neural netowrk model has generated even better results and has been chosen for the final app.
 
 ### Model Overview 
 
