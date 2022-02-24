@@ -68,10 +68,49 @@ Top Reasons For Choosing:
   * Based on the data input into the NN model, provide a data-driven buy/sell recommendation to the end user on a selected stock on their interest.
 
 ### Description of Data Exploration
-NEED
+
+We were looking for the datasets that had numerous metrics and ratios around stock fundamentals that would enable training the model and predicting the stock price - the target variable.
+
+The Kaggle data set contained more than 30 fields and a large number of data points sufficent to fit the neural net or machine learning model. We also extracted data from the yfinance library and official Yahoo Finance API. Both contained a rich set of data points for stock fundamentals as well as historical data.
+
+Extracts from these data sets have been loaded into DataFrames in Jupyter Notebook, reviewed for missing and Null values, data types, descriptive statistics for each column, and any data anomalies. 
+
+At the conclusion of the data exploration, we established that the Kaggle data set does meet the requirements as the main data set for the project machine learning / deep learning training.
+
+The yfinance library does meet the requirements for the on-demand request of the current stock fundamentals.
 
 ### Description of the Analysis
-NEED
+
+We have reviewed the following potential features and analysed their impact on the predicting the stock price. 
+
+- **DE Ratio**: The debt-to-equity (D/E) ratio compares a company's total liabilities to its shareholder equity 
+- **Trailing P/E**: The price-to-earnings ratio (P/E ratio) is the ratio for valuing a company that measures its current share price relative to its earnings per share (EPS)
+- **Price/Sales**: The price-to-sales ratio equals a company's market capitalization divided it by the company's total sales or revenue over the past 12 months
+- **Price/Book**: The price-to-book ratio compares a company's market value to its book value                  
+- **Profit Margin**: The profit margin is a ratio of a company's profit (sales minus all expenses) divided by its revenue              
+- **Operating Margin**: The operating margin is the ratio of operating income to net sales            
+- **Return on Assets**: The term return on assets (ROA) is a financial ratio that indicates how profitable a company is in relation to its total assets            
+- **Return on Equity**: The Return on equity (ROE) is a measure of financial performance calculated by dividing net income by shareholders' equity            
+- **Revenue Per Share**: The Revenue per share is a ratio that computes the total revenue earned per share over a designated period            
+- **Forward P/E**: The price-earnings ratio is the ratio of a company's share price to the company's earnings per share                 
+- **PEG Ratio**: The PEG ratio is a company's Price/Earnings ratio divided by its earnings growth rate                  
+- **Enterprise Value/Revenue**: The Enterprise Value to Revenue Multiple equals the corporate value (equity plus debt minus cash) divided by its annual revenue    
+- **Enterprise Value/EBITDA**:The Enterprise Value to EBITDA is the corporate value divided by its earnings before interest, taxes, and depreciation  
+- **Gross Profit**: The Gross profit is the profit a business makes after subtracting the cost of goods sold
+- **Diluted EPS**: The Earnings per share is a company's net profit divided by the number of common shares it has outstanding                 
+- **Earnings Growth**: The Earnings growth is the change in an entity's reported net income over a period of time             
+- **Revenue Growth**: The Revenue growth is the change in an entity's reported sales over a period of time             
+- **Total Cash Per Share**: The Cash per share is the measure of available cash to a business divided by the number of equity shares outstanding       
+- **Current Ratio**: The Current Ratio is Current Assets divided by Current Liabilities               
+- **Book Value Per Share**: The Book value per share is the ratio of equity available to common shareholders divided by the number of outstanding shares       
+- **Cash Flow**: The Cash flow is the net amount of cash and cash equivalents being transferred into and out of a business                   
+- **Beta**: The Beta is a measure of a stock's volatility in relation to the overall market.                        
+- **Market Cap**
+- **Enterprise Value**
+- **EBITDA**
+- **Net Income Avl to Common Shareholders**
+- **Total Cash**
+- **Total Debt**
 
 ## Database
 
@@ -84,7 +123,7 @@ A databased was created using PostgreSQL.
 - Dropped columns that did not contribute to the prediction
 - Replaced NaN (null) values with mean values for each stock ticker
 - Removed remaining rows that contained NaN values 
-- Removed rows with outliers beyong 2 standard deviation from the mean
+- Removed rows with outliers beyong 3 standard deviation from the mean
 - Scaled the training data to Mean = 0 and STD = 1 (with Standard Scaler)
 
 ### Description of preliminiary feature engineering and preliminary feature selection, including our decision-making process
@@ -104,31 +143,6 @@ NEED
 A provisional Deep Learning Regression Model has been developed (see **LOCAL_SERVER/ML_Model.ipynb**)
 
 Target Variable: **Stock Price** (Price)
-
-Initial Feature Variables: 
-
-- DE Ratio                    float64
-- Trailing P/E                float64
-- Price/Sales                 float64
-- Price/Book                  float64
-- Profit Margin               float64
-- Operating Margin            float64
-- Return on Assets            float64
-- Return on Equity            float64
-- Revenue Per Share           float64
-- Forward P/E                 float64
-- PEG Ratio                   float64
-- Enterprise Value/Revenue    float64
-- Enterprise Value/EBITDA     float64
-- Gross Profit                float64
-- Diluted EPS                 float64
-- Earnings Growth             float64
-- Revenue Growth              float64
-- Total Cash Per Share        float64
-- Current Ratio               float64
-- Book Value Per Share        float64
-- Cash Flow                   float64
-- Beta                        float64
 
 The model is using the **3 hidden layers**:
 
@@ -201,7 +215,12 @@ Dashboard Presentation: https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM
 
 ### Storyboard on Google Slides
 
-### Description of the tool(s) that will be used to create final dashboard
-NEED
+### Description of the tool(s) that are used to create final dashboard
+
+1. HTML
+2. CSS
+3. Java Script
+4. Flask
+5. Python Scripts
 
 ### Description of interactive element(s)
