@@ -237,11 +237,15 @@ The R-Square results are below.
 
 ## Dashboard
 
-Dashboard Presentation: https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
-
 ### Storyboard on Google Slides
 
+https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
+
 ### Description of the tool(s) that are used to create final dashboard
+
+We used Java Script and Python Script to create our dashboard.
+
+Plotly was used in our code to create an interactive graph based on input of the user.
 
 1. HTML
 2. CSS
@@ -250,3 +254,6 @@ Dashboard Presentation: https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM
 5. Python Scripts
 
 ### Description of interactive element(s)
+When opening the homepage the user is greeted with a banner on top with title "Stock Return Optimizer".  Below the title the website will return recommendation for the ticker "adbe" automatically.  To get recommendations for a different ticker the user must enter the ticker in the open text block and click the "Fetch Stock" button to run analysis on the specified stock.
+
+For the charting interface, the user must input the ticker, period of time and interval of price pulls.  By inserting the values in these 3 fields and clicking "fetch stock", a chart will generate.
