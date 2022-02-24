@@ -79,7 +79,7 @@ At the conclusion of the data exploration, we established that the Kaggle data s
 
 The yfinance library does meet the requirements for the on-demand request of the current stock fundamentals.
 
-### Description of the Analysis
+### Description of the Data Analysis
 
 We have reviewed the following potential features and analysed their impact on the predicting the stock price. 
 
@@ -105,12 +105,22 @@ We have reviewed the following potential features and analysed their impact on t
 - **Book Value Per Share**: The Book value per share is the ratio of equity available to common shareholders divided by the number of outstanding shares       
 - **Cash Flow**: The Cash flow is the net amount of cash and cash equivalents being transferred into and out of a business                   
 - **Beta**: The Beta is a measure of a stock's volatility in relation to the overall market.                        
-- **Market Cap**
-- **Enterprise Value**
-- **EBITDA**
-- **Net Income Avl to Common Shareholders**
-- **Total Cash**
-- **Total Debt**
+- **Market Cap**: The Market cap is the total value of all a company's shares of stock
+- **Enterprise Value**: The Enterprise Value is the market capitalization plus outstanding debt minus available cash
+- **EBITDA**: The Earning before Interest, Taxes, Depreciation, and Amortization
+- **Net Income Available to Common Shareholders**: The Net income applicable to common shares is earnings minus expenses, taxes, and dividends to preferred shares 
+- **Total Cash**: The Total cash is the company's current assets, or any assets that can be turned into cash within one year
+- **Total Debt**: The Total debt is calculated by adding up a company's liabilities.
+
+We have grouped the potential features above into three categories, as follows:
+
+1. Features that are positively correlated with stock price:
+Profit Margin, Operating Margin, Return on Assets, Return on Equity, Revenue Per Share, Gross Profit, Diluted EPS, Earnings Growth, Revenue Growth, Total Cash Per Share, Current Ratio, Book Value Per Share, Cash Flow, 
+
+2. Features that are inversly correlated with stock price:
+DE Ratio, Trailing P/E, Price/Sales, Price/Book, Forward P/E, PEG Ratio, Enterprise Value/Revenue, Enterprise Value/EBITDA, Beta 
+
+3. Features that have no statistically significant correlation with stock price: Market Cap, Enterprise Value, EBITDA, Net Income Available to Common Shareholders, Total Cash, Total Debt.
 
 ## Database
 
@@ -127,14 +137,28 @@ A databased was created using PostgreSQL.
 - Scaled the training data to Mean = 0 and STD = 1 (with Standard Scaler)
 
 ### Description of preliminiary feature engineering and preliminary feature selection, including our decision-making process
-NEED
+
+The data points that have no statistically significant correlation with stock price have been dropped from the feature set: **Market Cap, Enterprise Value, EBITDA, Net Income Available to Common Shareholders, Total Cash, Total Debt.**
+
+The remaining data points have been used to train the machine learnign and neural network models.
 
 ### Description of how data was split into training and testing sets
-NEED
+
+The cleaned data set has been split into the trainign and testing data sets with the **train_test_split** method from the **sklearn.model_selection** library. The standard split is 75% of the data into the trainign set and 25% of the data into the testing set.
 
 ### Explanation of model choice, including limitations and benefits
-NEED
 
+The target variable is continiuos data, hence regression models have been chosen. The following models have been evaluated:
+
+1. Linear Regression
+
+2. Decision Tree
+
+3. Support Vector Regression
+
+4. Lasso Regression
+
+5. Random Forest
 
 
 
@@ -150,7 +174,7 @@ The model is using the **3 hidden layers**:
 - hidden_nodes_layer2 = **30 neurons**
 - hidden_nodes_layer3 = **10 neurons**
 
-The **SELU** activation function is used on all the **Hidden layers**. 
+The **RELU** activation function is used on all the **Hidden layers**. 
 
 The **RELU** activation function is used on all the **Output layer**. 
 
