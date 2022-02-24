@@ -2,13 +2,29 @@
 
 Presentation Link: https://docs.google.com/presentation/d/1DhafRC4UR8gYSsYWFzmQp2ccarPR_o2Tjhe-K0d2gU8/edit?usp=sharing
 
-Dashboard Presentation: https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
-
 ## Collaborators 
 
 The team (**Lydia Alexander**, **Muhammad Sabir**, and **Lev Levine**) has made the decision to collaborate on this project working on and submitting each area as a team.
 
-## Overview
+## Communications Protocol
+
+### Cadence & Tools
+
+The team meets at least 3 times per week: Tuesday, Thursday, and Saturday using the **Discord** Collaboration Software. 
+
+**Github** is being actively used to share the work and manage versions. 
+
+**Slack** is used throught the week to exchange messages.
+
+### Team Core Areas of Responsibility
+
+**Lydia** - Database
+
+**Muhammad** - Github & Vusualization
+
+**Lev** - Machine Learning & App Architecture
+
+# Overview/Outline
 
 ### Selected topic
 
@@ -34,44 +50,54 @@ Top Reasons For Choosing:
 
 ### Description of data sources
 
-  - Yahoo Finance dataset on Kaggle  [https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013](https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013)
-  - Yahoo Finance API [https://www.yahoofinanceapi.com/](https://www.yahoofinanceapi.com/)
-  - yfinance Library [https://pypi.org/project/yfinance/](https://pypi.org/project/yfinance/)
+#### Yahoo Finance dataset on Kaggle  [https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013](https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013)
+
+  The Yahoo Finance dataset from Kaggle includes key statistics of the S & P 500 ("a market-capitalization-weighted index of the 500 largest publicly traded companies in the U.S.") from 2003 - 2013. [Source: Investopedia] (https://www.investopedia.com/terms/s/sp500.asp)
+
+#### Yahoo Finance API [https://www.yahoofinanceapi.com/](https://www.yahoofinanceapi.com/)
+
+  "Yahoo Finance API is a service that provides stock quotes and other financial information for any stock ticker symbol. It is one of the largest source of financial data available on the web, and it is updated continuously throughout the day. Yahoo Finance API covers over 37,000 stocks in more than 50 countries. Yahoo Finance is a media property that provides various financial news and data including stock details, quotes, press releases, financial reports."  [Source: Yahoo Finance API - The Complete Guide](https://blog.api.rakuten.net/api-tutorial-yahoo-finance/#:~:text=Yahoo%20Finance%20API%20is%20a%20reliable%20source%20of,Finance%20API%20can%20be%20accessed%20from%20Rakuten%20RapidAPI.)
+
+#### yfinance Library [https://pypi.org/project/yfinance/](https://pypi.org/project/yfinance/)
+
+  The yfinance Libarary data source "is a popular open source library developed as a means to access the financail data available on Yahoo Finance" offering a "range of market data on stocks, bonds, currencies and crytpocurrencies." [yfinance Libarary - A Complete Guide](https://algotrading101.com/learn/yfinance-guide/#:~:text=What%20is%20yfinance%3F%20yfinance%20is%20a%20popular%20open,market%20data%20on%20stocks%2C%20bonds%2C%20currencies%20and%20cryptocurrencies.)
+
 
 ### Questions the App will Answer with the Data
 
   * Based on the data input into the NN model, provide a data-driven buy/sell recommendation to the end user on a selected stock on their interest.
 
-## Communications Protocol
+### Description of Data Exploration
+NEED
 
-### Cadence & Tools
-
-The team meets at least 3 times per week: Tuesday, Thursday, and Saturday using the **Discord** Collaboration Software. 
-
-**Github** is being actively used to share the work and manage versions. 
-
-**Slack** is used throught the week to exchange messages.
-
-### Team Core Areas of Responsibility
-
-**Lydia** - Database
-
-**Muhammad** - Github & Vusualization
-
-**Lev** - Machine Learning & App Architecture
+### Description of the Analysis
+NEED
 
 ## Database
 
 A databased was created using PostgreSQL.
 
-![](database/database_flow.png)
-
-**ERD**
-
-![](database/Database_ERD_v3.png)
-
-
 ## Machine Learning Model
+
+### Description of preliminary data preprocessing
+
+- Dropped columns that did not contribute to the prediction
+- Replaced NaN (null) values with mean values for each stock ticker
+- Removed remaining rows that contained NaN values 
+- Removed rows with outliers beyong 2 standard deviation from the mean
+- Scaled the training data to Mean = 0 and STD = 1 (with Standard Scaler)
+
+### Description of preliminiary feature engineering and preliminary feature selection, including our decision-making process
+NEED
+
+### Description of how data was split into training and testing sets
+NEED
+
+### Explanation of model choice, including limitations and benefits
+NEED
+
+
+
 
 ### Model Overview 
 
@@ -122,13 +148,6 @@ Since this is a regression analysis, RELU and SELU activation functions generate
 
 The model is run **100 epochs** to train.
 
-### Data preprosessing
-
-- Dropped columns that did not contribute to the prediction
-- Replaced NaN (null) values with mean values for each stock ticker
-- Removed remaining rows that contained NaN values 
-- Removed rows with outliers beyong 2 standard deviation from the mean
-- Scaled the training data to Mean = 0 and STD = 1 (with Standard Scaler)
 
 ### Data Transformation
 
@@ -175,3 +194,14 @@ The R-Square results are below.
 ### Prototype 1.0 App Deployment on HEROKU (to be updated)
 
 [https://stockoptimizer.herokuapp.com/](https://stockoptimizer.herokuapp.com/)
+
+## Dashboard
+
+Dashboard Presentation: https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
+
+### Storyboard on Google Slides
+
+### Description of the tool(s) that will be used to create final dashboard
+NEED
+
+### Description of interactive element(s)
