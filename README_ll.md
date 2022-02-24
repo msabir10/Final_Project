@@ -188,7 +188,6 @@ Since this is a regression analysis, RELU and SELU activation functions generate
 
 The model is run **100 epochs** to train.
 
-
 ### Data Transformation
 
 - An unsupervised machine learning model has been applied to the cleaned dataset to cluster the data into groups with similar behavioral patterns. K-Means model has been used and the Elbow Curve built.
