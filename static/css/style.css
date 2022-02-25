@@ -1,0 +1,23 @@
+body {
+  color: #0b0280;
+}
+.jumbotron {
+    background-image: url("../picture.jpg");
+    background-size: 100% 100%;
+    text-align: center;
+    padding-top: 0%;
+    padding-bottom: 5%;
+}
+
+#first {padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.sectionbar {
+  font-size: 12px
+}
+
+#chartpad {
+  padding-left: 30px;
+  padding-right: 30px;
+}
