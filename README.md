@@ -2,28 +2,6 @@
 
 Presentation Link: https://docs.google.com/presentation/d/1DhafRC4UR8gYSsYWFzmQp2ccarPR_o2Tjhe-K0d2gU8/edit?usp=sharing
 
-## Collaborators 
-
-The team (**Lydia Alexander**, **Muhammad Sabir**, and **Lev Levine**) has made the decision to collaborate on this project working on and submitting each area as a team.
-
-## Communications Protocol
-
-### Cadence & Tools
-
-The team meets at least 3 times per week: Tuesday, Thursday, and Saturday using the **Discord** Collaboration Software. 
-
-**Github** is being actively used to share the work and manage versions. 
-
-**Slack** is used throught the week to exchange messages.
-
-### Team Core Areas of Responsibility
-
-**Lydia** - Database
-
-**Muhammad** - Github & Vusualization
-
-**Lev** - Machine Learning & App Architecture
-
 # Overview/Outline
 
 ### Selected topic
@@ -52,7 +30,7 @@ Top Reasons For Choosing:
 
 #### Yahoo Finance dataset on Kaggle  [https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013](https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013)
 
-  The Yahoo Finance dataset from Kaggle includes key statistics of the S & P 500 ("a market-capitalization-weighted index of the 500 largest publicly traded companies in the U.S.") from 2003 - 2013. [Source: Investopedia] (https://www.investopedia.com/terms/s/sp500.asp)
+  The Yahoo Finance dataset from Kaggle includes key statistics of the S & P 500 ("a market-capitalization-weighted index of the 500 largest publicly traded companies in the U.S.") from 2003 - 2013. [Source: Investopedia](https://www.investopedia.com/terms/s/sp500.asp)
 
 #### Yahoo Finance API [https://www.yahoofinanceapi.com/](https://www.yahoofinanceapi.com/)
 
@@ -60,7 +38,7 @@ Top Reasons For Choosing:
 
 #### yfinance Library [https://pypi.org/project/yfinance/](https://pypi.org/project/yfinance/)
 
-  The yfinance Libarary data source "is a popular open source library developed as a means to access the financail data available on Yahoo Finance" offering a "range of market data on stocks, bonds, currencies and crytpocurrencies." [yfinance Libarary - A Complete Guide](https://algotrading101.com/learn/yfinance-guide/#:~:text=What%20is%20yfinance%3F%20yfinance%20is%20a%20popular%20open,market%20data%20on%20stocks%2C%20bonds%2C%20currencies%20and%20cryptocurrencies.)
+  The yfinance Libarary data source "is a popular open source library developed as a means to access the financial data available on Yahoo Finance" offering a "range of market data on stocks, bonds, currencies and crytpocurrencies." [Source: yfinance Libarary - A Complete Guide](https://algotrading101.com/learn/yfinance-guide/#:~:text=What%20is%20yfinance%3F%20yfinance%20is%20a%20popular%20open,market%20data%20on%20stocks%2C%20bonds%2C%20currencies%20and%20cryptocurrencies.)
 
 
 ### Questions the App will Answer with the Data
@@ -71,7 +49,7 @@ Top Reasons For Choosing:
 
 We were looking for the datasets that had numerous metrics and ratios around stock fundamentals that would enable training the model and predicting the stock price - the target variable.
 
-The Kaggle data set contained more than 30 fields and a large number of data points sufficent to fit the neural net or machine learning model. We also extracted data from the yfinance library and official Yahoo Finance API. Both contained a rich set of data points for stock fundamentals as well as historical data.
+The Kaggle data set contained more than 30 fields and a large number of data points sufficient to fit the neural net or machine learning model. We also extracted data from the yfinance library and official Yahoo Finance API. Both contained a rich set of data points for stock fundamentals as well as historical data.
 
 Extracts from these data sets have been loaded into DataFrames in Jupyter Notebook, reviewed for missing and Null values, data types, descriptive statistics for each column, and any data anomalies. 
 
@@ -164,6 +142,15 @@ Adjusted R-Square Method has been used to evaluate the model accuracy. The Rando
 
 Then, we tried to run neural network models with various layers, number of neurons, activation function, and number of epochs. The neural netowrk model has generated even better results and has been chosen for the final app.
 
+### Explanation of changes in model choice (if changes occurred between the Segment 2 and Segment 3 deliverable)
+NEED
+
+### Description of how they have trained the model thus far, and any additional training that will take place
+NEED
+
+### Description of current accuracy score
+NEED
+
 ### Model Overview 
 
 A provisional Deep Learning Regression Model has been developed (see **LOCAL_SERVER/ML_Model.ipynb**)
@@ -241,6 +228,7 @@ The R-Square results are below.
 https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
 
 ### Description of the tool(s) that are used to create final dashboard
+NEED DESCRIPTION
 
 We used Java Script and Python Script to create our dashboard.
 
@@ -256,3 +244,9 @@ Plotly was used in our code to create an interactive graph based on input of the
 When opening the homepage the user is greeted with a banner on top with title "Stock Return Optimizer".  Below the title the website will return recommendation for the ticker "adbe" automatically.  To get recommendations for a different ticker the user must enter the ticker in the open text block and click the "Fetch Stock" button to run analysis on the specified stock.
 
 For the charting interface, the user must input the ticker, period of time and interval of price pulls.  By inserting the values in these 3 fields and clicking "fetch stock", a chart will generate.
+
+### Images from the initial analysis
+NEED
+
+### Data (images or report) from the machine learning task
+NEED
