@@ -50,8 +50,10 @@
 
       <div class="col-md-3">
         <div class="container">
-          <h3 class="d-block btn btn-success">Recommendation</h3>
+          <h3 class="d-block btn btn-success" name="recbutton">Recommendation</h3>
         <h2 class="text-center">{{rec}}  </h2>
+        
+        
       </div>
 
       </div>
@@ -64,18 +66,29 @@
     <div class="container-fluid" id="chartpad">
         <div class="row">
           
-              <div class="col-3" id="first"><p><b>Stock Info</b></p>
+              <div class="col-3" id="first" ><p><b>Stock Info</b></p>
                     <hr size ="6">
-                        <p>Symbol: <b id="right_align">{{sm}}</b></p>
+                    <div class="row">
+                      <div class="col">                
+                        Symbol: </div> <div class="col"style="textalign: right" > <b>{{sm}}</b> </div> </div>
                         <hr>
-                        <p>Day High: $ <b><span id="day_h"></span> </b></p>
+                        <div class="row">
+                          <div class="col">
+                        Day High: $ </div> <div class="col"style="textalign: right" > <b><span id="day_h"></span> </b> </div> </div>
                         <hr>
-                        <p>Day Low: $ <b><span id="day_l"></span></b></p>
+                        <div class="row">
+                          <div class="col">
+                        Day Low: $ </div> <div class="col"style="textalign: right" ><b><span id="day_l"> </span></b> </div> </div>
+                        <hr> 
+                        <div class="row">
+                          <div class="col">
+                        52 Week High: $ </div> <div class="col"style="textalign: right" ><b><span id="w52_h"></span></b> </div> </div>
                         <hr>
-                        <p>52 Week High: $ <b><span id="w52_h"></span></b></p>
-                        <hr>
-                        <p>52 Week Low: $ <b><span id="w52_l"></span></b></p>
-               
+                        <div class="row">
+                          <div class="col">
+                        52 Week Low: $ </div> <div class="col"style="textalign: right" ><b><span id="w52_l"></span></b> </div> </div>
+
+                        
                 </div>
                 <div class="col-9">
                     <div class="chart" id="chart">
@@ -111,8 +124,15 @@
         document.getElementById("w52_l").innerHTML = {{w52_low}}.toFixed(2);
         document.getElementById("pps").innerHTML = {{pp}}.toFixed(2);
         document.getElementById("cps").innerHTML = {{cp}}.toFixed(2);
-
+      
     </script>
+    <!-- <script> 
+    if {{rec}} == "Sell" {
+      var recbuttoncolor = "red"
+    }
+  
+    </script> -->
+
 
 </html>
 
