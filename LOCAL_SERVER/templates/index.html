@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Stock Return Maximizer</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -50,8 +51,8 @@
 
       <div class="col-md-3">
         <div class="container">
-          <h3 class="d-block btn btn-success" name="recbutton">Recommendation</h3>
-        <h2 class="text-center">{{rec}}  </h2>
+          <h3 class="d-block btn" name="recbutton" id="background_select">Recommendation</h3>
+        <h2 class="text-center" id="color_select">{{rec}}</h2>
         
         
       </div>
@@ -97,7 +98,7 @@
         </div>
         <div class="container-fluid">
             <h3 class="col text-light bg-dark text-center">Business Summary</h3>
-            <p class="sectionbar">{{bs}} </p>
+            <p class="sectionbar">{{bs}}</p>
           </div>
     </div>
     </div>
@@ -112,8 +113,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
-
+    
     <script type="text/javascript">
         var graphs = {{graphJSON | safe}};
         Plotly.plot('chart',graphs,{});
@@ -124,14 +124,31 @@
         document.getElementById("w52_l").innerHTML = {{w52_low}}.toFixed(2);
         document.getElementById("pps").innerHTML = {{pp}}.toFixed(2);
         document.getElementById("cps").innerHTML = {{cp}}.toFixed(2);
-      
+        
+        recc = document.getElementById("color_select").innerHTML;
+
+        if (recc == "Buy") {
+          document.getElementById("color_select").style.color = "green";
+          document.getElementById("background_select").style.backgroundColor = "green";
+          document.getElementById("background_select").style.color = "white";}
+
+        else if (recc == "Strong Buy") {
+        document.getElementById("color_select").style.color = "purple";
+        document.getElementById("background_select").style.backgroundColor = "purple";
+        document.getElementById("background_select").style.color = "white";}
+
+        else if (recc == "Sell") {
+        document.getElementById("color_select").style.color = "red";
+        document.getElementById("background_select").style.backgroundColor = "red";
+        document.getElementById("background_select").style.color = "white";}
+
+        else {
+        document.getElementById("color_select").style.color = "blue";
+        document.getElementById("background_select").style.backgroundColor = "blue";
+        document.getElementById("background_select").style.color = "white";}
+
     </script>
-    <!-- <script> 
-    if {{rec}} == "Sell" {
-      var recbuttoncolor = "red"
-    }
-  
-    </script> -->
+
 
 
 </html>
