@@ -73,9 +73,17 @@ def initialize_table():
 
     # Create initial table
     cur = conn.cursor()
-    cur.execute("""CREATE TABLE IF NOT EXISTS predicted_price (predictedprice FLOAT, accuracy VARCHAR);""")
-    cur.execute("""INSERT INTO predicted_price (predictedprice, accuracy) VALUES (1.1, 'High');""")
-    conn.commit()
+    cur.execute("select * from information_schema.tables where table_name=%s", ('mytable',))
+    
+    #check if the table exists
+    if not bool(cur.rowcount):
+        ddf = {'predictedprice': 1.1, 'accuracy': 'High'}
+        price_df=pd.DataFrame(ddf, index=[0])
+        price_df.to_sql(name='predicted_price', con=engine, if_exists='replace')
+        
+    #cur.execute("""CREATE TABLE IF NOT EXISTS predicted_price (predictedprice FLOAT, accuracy VARCHAR);""")
+    #cur.execute("""INSERT INTO predicted_price (predictedprice, accuracy) VALUES (1.1, 'High');""")
+    #conn.commit()
 
     # Create a DF for the Symbol Name Table (CSV)
     class_df=pd.read_csv('ticker_clusters.csv', index_col=False, names=['tick', 'class'], header=0)
