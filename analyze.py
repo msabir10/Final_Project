@@ -24,10 +24,10 @@ heroku_URI = os.environ['heroku_URI']
 
 def initialize_table():
 
-    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
-    h_database = heroku_database
-    h_user = heroku_user
-    h_password = heroku_pass
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_database = heroku_database
+    #h_user = heroku_user
+    #h_password = heroku_pass
 
     #l_host = 'localhost'
     #l_database = 'final_project'
@@ -108,10 +108,10 @@ def data_predict(ticker):
 
     #Connect to PostgreSQL
     
-    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
-    h_database = heroku_database
-    h_user = heroku_user
-    h_password = heroku_pass
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_database = heroku_database
+    #h_user = heroku_user
+    #h_password = heroku_pass
 
     #l_host = 'localhost'
     #l_database = 'final_project'
@@ -231,10 +231,10 @@ def create_plot():
 
     #Connect to PostgreSQL
     
-    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
-    h_database = heroku_database
-    h_user = heroku_user
-    h_password = heroku_pass
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_database = heroku_database
+    #h_user = heroku_user
+    #h_password = heroku_pass
 
     #l_host = 'localhost'
     #l_database = 'final_project'
