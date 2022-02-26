@@ -76,7 +76,7 @@ def initialize_table():
     #class_df=pd.read_csv('ticker_clusters.csv', index_col=False, names=['tick', 'class'], header=0)
     
     # Create a new Table for Clusters in Posgres
-    class_df.to_sql(name='clusters', con=engine, if_exists='replace', index=False)
+    #class_df.to_sql(name='clusters', con=engine, if_exists='replace', index=False)
 
     # Create initial table
     cur = conn.cursor()
