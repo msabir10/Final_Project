@@ -178,8 +178,7 @@ def data_predict(ticker):
         
 
     # Load the Saved Model
-    #from tensorflow 
-    import keras
+    from tensorflow import keras
     try:
         model_num = int(query_results[-1]) # Get the Model Class Number
     except:
