@@ -16,7 +16,7 @@ from boto.s3.connection import S3Connection
 import json
 
 #Heroku secret key config
-s3 = S3Connection(os.environ['heroku_pass'], os.environ['heroku_URI'],os.environ['heroku_user'],os.environ['heroku_database'])
+s3 = S3Connection(os.environ['heroku_pass'], os.environ['heroku_URI'], os.environ['heroku_user'], os.environ['heroku_database'])
 #bbb = s3.get_bucket(s3)
 h_database = os.environ['heroku_database'] #bbb.get_key('heroku_database')
 h_user = os.environ['heroku_user'] #bbb.get_key('heroku_user')
@@ -32,7 +32,7 @@ db = SQLAlchemy(app)
     
 def get_db_connection():
 
-    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     #h_database = heroku_database
     #h_user = heroku_user
     #h_password = heroku_pass
@@ -56,7 +56,7 @@ def create_plot():
 
     #Connect to PostgreSQL
     
-    h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
+    #h_host = 'ec2-18-235-114-62.compute-1.amazonaws.com'
     #h_database = heroku_database
     #h_user = heroku_user
     #h_password = heroku_pass
