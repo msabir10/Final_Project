@@ -9,7 +9,7 @@ import psycopg2
 from sqlalchemy import create_engine
 from sklearn.preprocessing import StandardScaler
 import joblib
-#import tensorflow as tf
+import tensorflow as tf
 import keras
 
 from boto.s3.connection import S3Connection
