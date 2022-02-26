@@ -49,7 +49,7 @@ def get_db_connection():
     
     db_string = h_URI
     engine = create_engine(db_string) 
-    #analyze.initialize_table()
+    analyze.initialize_table()
     return conn
 
 def create_plot():
