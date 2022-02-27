@@ -148,9 +148,6 @@ NEED
 ### Description of how they have trained the model thus far, and any additional training that will take place
 NEED
 
-### Description of current accuracy score
-NEED
-
 ### Model Overview 
 
 A provisional Deep Learning Regression Model has been developed (see **LOCAL_SERVER/ML_Model.ipynb**)
@@ -189,19 +186,40 @@ For each Cluster, a unique Deep Learning Model has been trained based on the Clu
 
 For new stock tickers that are not part of the overall dataset and may be potentially entered by the App users, a 7th model has been trained. The 7th model is based on the overall dateset (without clustering). Both, the model and scaler have also been saved.
 
-### Model Evaluation
+### Description of current accuracy score (Model Evaluation)
 
 Adjusted R-Square has been used to evaluate the each Model accuracy. 
 
 The R-Square results are below.
 
 1. Model 0: 0.34
+
+![Model1](Resources/rsqured1.png)
+
 2. Model 1: 0.23
+
+![Model2](Resources/rsqured2.png)
+
 3. Model 2: 0.71
+
+![Model3](Resources/rsqured3.png)
+
 4. Model 3: 0.99
+
+![Model4](Resources/rsqured4.png)
+
 5. Model 4: 0.37
+
+![Model5](Resources/rsqured5.png)
+
 6. Model 5: 0.62
+
+![Model6](Resources/rsqured6.png)
+
 7. Model 6: 0.33
+
+![Model7](Resources/rsqured7.png)
+
 
 ### Overall User Experience
 
@@ -213,13 +231,23 @@ The R-Square results are below.
 4. The predicted and current stock price are displayed for the user
 5. If predicted stock price > current stock price, a BUY recommendation generated and vise versa
 
-**The working Prototype 2.0 User Interface (localhost deployment):**
-
-![App](Resources/screen2.png)
-
-### Prototype 1.0 App Deployment on HEROKU (to be updated)
+### App Deployment on HEROKU 
 
 [https://stockoptimizer.herokuapp.com/](https://stockoptimizer.herokuapp.com/)
+
+### App User Interface
+
+#### Stock Ticker Entry Screen
+![App1](Resources/screen1.png)
+
+#### Stock Chart Screen
+![App2](Resources/screen2.png)
+
+#### Help Screen
+![App3](Resources/screen3.png)
+
+#### Contacts Screen
+![App4](Resources/screen4.png)
 
 ## Dashboard
 
