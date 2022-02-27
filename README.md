@@ -23,7 +23,7 @@ Statistics:
 Top Reasons For Choosing:
 
   * The stock market is a data rich topic with data available for analysis to include APIs, libraries and static data to pull from. Having a large amount of data for our model will increase the liklihood of our model being successful.
-  * This topic is very relevant to the maturity of the American people.  As the above statistics detail, 55% of US adults have money in the stock market, making this topic very significant to a large number of people in the US.
+  * This topic is very relevant to the majority of the American people. As the above statistics detail, 55% of US adults have money in the stock market, making this topic very significant to a large number of people in the US.
   * A member of our team is very involved in the day trading of the stock market and understands the business.
 
 ### Description of data sources
