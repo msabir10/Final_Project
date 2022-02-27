@@ -278,8 +278,7 @@ The R-Square results for each model are shown below.
 5. If predicted stock price > current stock price, a BUY recommendation generated and vise versa
 
 ```diff
-- text in red
-### App Deployment on HEROKU 
+- ### App Deployment on HEROKU 
 ```
 [https://stockoptimizer.herokuapp.com/](https://stockoptimizer.herokuapp.com/)
 
