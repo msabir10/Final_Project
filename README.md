@@ -120,6 +120,36 @@ The data points that have no statistically significant correlation with stock pr
 
 The remaining data points have been used to train the machine learnign and neural network models.
 
+### Images from the initial analysis
+
+#### Initial DataFrame
+
+![df1](Resources/df1.png)
+
+#### Data Types
+
+![df2](Resources/df2.png)
+
+#### Replace NaNs with Average values
+
+![df3](Resources/df3.png)
+
+#### Drop remainign rows wuth Null values
+
+![df4](Resources/df4.png)
+
+#### Descriptive Statistics
+
+![df5](Resources/df5.png)
+
+#### Remove rows with outliers and incorrect stock prices
+
+![df6](Resources/df6.png)
+
+#### Drop columns that are not used for model training 
+
+![df7](Resources/df7.png)
+
 ### Description of how data was split into training and testing sets
 
 The cleaned data set has been split into the trainign and testing data sets with the **train_test_split** method from the **sklearn.model_selection** library. The standard split is 75% of the data into the training set and 25% of the data into the testing set.
@@ -277,9 +307,8 @@ The R-Square results for each model are shown below.
 4. The predicted and current stock price are displayed for the user
 5. If predicted stock price > current stock price, a BUY recommendation generated and vise versa
 
-```diff
-- ### App Deployment on HEROKU 
-```
+### App Deployment on HEROKU 
+
 [https://stockoptimizer.herokuapp.com/](https://stockoptimizer.herokuapp.com/)
 
 ### App User Interface
@@ -303,6 +332,7 @@ The R-Square results for each model are shown below.
 https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
 
 ### Description of the tool(s) that are used to create final dashboard
+
 NEED DESCRIPTION
 
 We used Java Script and Python Script to create our dashboard.
@@ -316,10 +346,10 @@ Plotly was used in our code to create an interactive graph based on input of the
 5. Python Scripts
 
 ### Description of interactive element(s)
+
 When opening the homepage the user is greeted with a banner on top with title "Stock Return Optimizer".  Below the title the website will return recommendation for the ticker "adbe" automatically.  To get recommendations for a different ticker the user must enter the ticker in the open text block and click the "Fetch Stock" button to run analysis on the specified stock.
 
 For the charting interface, the user must input the ticker, period of time and interval of price pulls.  By inserting the values in these 3 fields and clicking "fetch stock", a chart will generate.
 
-### Images from the initial analysis
-NEED
+
 
