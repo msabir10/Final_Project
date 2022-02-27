@@ -6,11 +6,11 @@ Presentation Link: https://docs.google.com/presentation/d/1DhafRC4UR8gYSsYWFzmQp
 
 ### Selected topic
 
-  * Stock Price Prediction
+  * **Stock Price Prediction**
 
 ### Reasons the topic was selected
 
-Statistics:
+Facts & Figures:
 - $95 trillion is the global stock market value.
 - The current stock market crash interrupted a 10-year record.
 - On average, the stock market performs the poorest in September.
@@ -142,12 +142,6 @@ Adjusted R-Square Method has been used to evaluate the model accuracy. The Rando
 
 Then, we tried to run neural network models with various layers, number of neurons, activation function, and number of epochs. The neural netowrk model has generated even better results and has been chosen for the final app.
 
-### Explanation of changes in model choice (if changes occurred between the Segment 2 and Segment 3 deliverable)
-NEED
-
-### Description of how they have trained the model thus far, and any additional training that will take place
-NEED
-
 ### Model Overview 
 
 A provisional Deep Learning Regression Model has been developed (see **LOCAL_SERVER/ML_Model.ipynb**)
@@ -164,13 +158,17 @@ The **RELU** activation function is used on all the **Hidden layers**.
 
 The **RELU** activation function is used on all the **Output layer**. 
 
-Since this is a regression analysis, RELU and SELU activation functions generate adequate results.
+Since this is a regression analysis, RELU activation function generate adequate results.
 
 **The Neural Network Model:**
 
 ![Model](Resources/model_white.png)
 
 The model is run **100 epochs** to train.
+
+We have used the **adam** optimization function, which uses a gradient descent approach, to improve the training of the network model and prevent the model from focusing on weaker features. 
+
+We have used the **mean_absolute_error** loss metric to evaluate the performance of the model through each epoch. 
 
 ### Data Transformation
 
@@ -180,17 +178,61 @@ The model is run **100 epochs** to train.
 
 Based on the Elbow Curve, **k=6** has been selected. We have assigned a **Cluster Class** to each Stock Ticker in the dataset accordingly.
 
-### Model Training and Saving
+### Explanation of changes in model choice (if changes occurred between the Segment 2 and Segment 3 deliverable)
+
+Initially, the model was developed based on 8 features:
+
+- Trailing P/E
+- Return on Assets
+- Return on Equity
+- Forward P/E
+- PEG Ratio
+- Enterprise Value/EBITDA
+- Diluted EPS
+- Earnings Growth
+
+We have also used the SELU activation functions in layers 2 & 3 and in the output layer of the model.
+
+The initial model accuracy was lower than expected at 0.07 Adjusted R-Sqaure. Hence, we have expanded the list of features and replaced the SELU activation function with RELU at all layers, which generated higher accuracy.
+
+Another major change described in **Data Transformation** section was introducing initial data transformation with unsupervised learning breaking the data into 6 clusters and fitting individual model for each cluster.
+
+### Description of how we have trained the model thus far, and any additional training that will take place
+
+Before training the model, we ensured that the data was clean and separated it into Trainign and Test datasets (see **Description of how data was split into training and testing sets**). The datasets have been normalized with the StandardScaler (see **Description of preliminary data preprocessing**). Then, the datasets have been clustered into 6 clusters based on the unsupervised machine learning model (see **Data transformation**).
+
+**Data Scaling**
+
+![Scaler](Resources/scaler.png)
 
 For each Cluster, a unique Deep Learning Model has been trained based on the Cluster data subset. The Models for each Cluster have been saved (total of 6). The Scalers for each Cluster have been saved (total of 6).
 
 For new stock tickers that are not part of the overall dataset and may be potentially entered by the App users, a 7th model has been trained. The 7th model is based on the overall dateset (without clustering). Both, the model and scaler have also been saved.
 
+The model training was conducted on 100 epochs. The **loss function** (*mean_absolute_error*) has shown the following improvements for each cluster model:
+
+1. Model 0: Epoch 1: 25.7397; Epoch 100: 4.3742
+2. Model 1: Epoch 1: 57.4215; Epoch 100: 18.8826
+3. Model 2: Epoch 1: 47.7136; Epoch 100: 11.2194
+4. Model 3: Epoch 1: 42.6148; Epoch 100: 2.6821
+5. Model 4: Epoch 1: 40.5972; Epoch 100: 6.6608
+6. Model 5: Epoch 1: 44.1796; Epoch 100: 7.3443
+7. Model 6: Epoch 1: 27.2992; Epoch 100: 7.3515
+
+![Training](Resources/training.png)
+
+### Data (images or report) from the machine learning task
+NEED
+
 ### Description of current accuracy score (Model Evaluation)
 
 Adjusted R-Square has been used to evaluate the each Model accuracy. 
 
-The R-Square results are below.
+R Square measures how much variability in dependent variable can be explained by the model. It is the square of the Correlation Coefficient(R). It is is a good measure to determine how well the model fits the dependent variables. However, it does not take into consideration of overfitting problem. 
+
+In our case, the regression model has many feature (independent) variables and it may fit well to the training data but performs badly for testing data. As a result, the Adjusted R Square has been used to prevent potential overfitting issues.
+
+The R-Square results for each model are shown below.
 
 1. Model 0: 0.34
 
@@ -219,7 +261,6 @@ The R-Square results are below.
 7. Model 6: 0.33
 
 ![Model7](Resources/rsquared7.png)
-
 
 ### Overall User Experience
 
@@ -276,5 +317,3 @@ For the charting interface, the user must input the ticker, period of time and i
 ### Images from the initial analysis
 NEED
 
-### Data (images or report) from the machine learning task
-NEED
