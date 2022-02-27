@@ -194,31 +194,31 @@ The R-Square results are below.
 
 1. Model 0: 0.34
 
-![Model1](Resources/rsqured1.png)
+![Model1](Resources/rsquared1.png)
 
 2. Model 1: 0.23
 
-![Model2](Resources/rsqured2.png)
+![Model2](Resources/rsquared2.png)
 
 3. Model 2: 0.71
 
-![Model3](Resources/rsqured3.png)
+![Model3](Resources/rsquared3.png)
 
 4. Model 3: 0.99
 
-![Model4](Resources/rsqured4.png)
+![Model4](Resources/rsquared4.png)
 
 5. Model 4: 0.37
 
-![Model5](Resources/rsqured5.png)
+![Model5](Resources/rsquared5.png)
 
 6. Model 5: 0.62
 
-![Model6](Resources/rsqured6.png)
+![Model6](Resources/rsquared6.png)
 
 7. Model 6: 0.33
 
-![Model7](Resources/rsqured7.png)
+![Model7](Resources/rsquared7.png)
 
 
 ### Overall User Experience
