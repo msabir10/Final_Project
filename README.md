@@ -178,6 +178,14 @@ We have used the **mean_absolute_error** loss metric to evaluate the performance
 
 Based on the Elbow Curve, **k=6** has been selected. We have assigned a **Cluster Class** to each Stock Ticker in the dataset accordingly.
 
+#### Clustering
+
+![Clustering](Resources/clustering.png)
+
+#### DataFrame with appended Class(cluster) column
+
+![DF_clustering](Resources/df_clusters.png)
+
 ### Explanation of changes in model choice (if changes occurred between the Segment 2 and Segment 3 deliverable)
 
 Initially, the model was developed based on 8 features:
@@ -220,9 +228,6 @@ The model training was conducted on 100 epochs. The **loss function** (*mean_abs
 7. Model 6: Epoch 1: 27.2992; Epoch 100: 7.3515
 
 ![Training](Resources/training.png)
-
-### Data (images or report) from the machine learning task
-NEED
 
 ### Description of current accuracy score (Model Evaluation)
 
@@ -272,6 +277,7 @@ The R-Square results for each model are shown below.
 4. The predicted and current stock price are displayed for the user
 5. If predicted stock price > current stock price, a BUY recommendation generated and vise versa
 
+- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
 ### App Deployment on HEROKU 
 
 [https://stockoptimizer.herokuapp.com/](https://stockoptimizer.herokuapp.com/)
