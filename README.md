@@ -4,11 +4,11 @@ Presentation Link: https://docs.google.com/presentation/d/1DhafRC4UR8gYSsYWFzmQp
 
 # Overview/Outline
 
-### Selected topic
+### Selected Topic
 
   * **Stock Price Prediction**
 
-### Reasons the topic was selected
+### Reasons the Topic was Selected
 
 Facts & Figures:
 - $95 trillion is the global stock market value.
@@ -20,13 +20,13 @@ Facts & Figures:
 
 [Source: Stock Market Statistics](https://spendmenot.com/blog/stock-market-statistics/#:~:text=Let%E2%80%99s%20see%20how%20many%20people%20invest%20in%20the,of%20Americans%20own%20stocks%2C%20the%20answer%20is%2052%25)
 
-Top Reasons For Choosing:
+Top Reasons for Choosing:
 
-  * The stock market is a data rich topic with data available for analysis to include APIs, libraries and static data to pull from. Having a large amount of data for our model will increase the liklihood of our model being successful.
+  * The stock market is a data rich topic with data available for analysis to include APIs, libraries and static data to pull from. Having a large amount of data for our model will increase the likelihood of our model being successful.
   * This topic is very relevant to the majority of the American people. As the above statistics detail, 55% of US adults have money in the stock market, making this topic very significant to a large number of people in the US.
   * A member of our team is very involved in the day trading of the stock market and understands the business.
 
-### Description of data sources
+### Description of Data Sources
 
 #### Yahoo Finance dataset on Kaggle  [https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013](https://www.kaggle.com/jerryhans/key-statistics-yahoo-finance-stocks-of-2003-2013)
 
@@ -38,12 +38,12 @@ Top Reasons For Choosing:
 
 #### yfinance Library [https://pypi.org/project/yfinance/](https://pypi.org/project/yfinance/)
 
-  The yfinance Libarary data source "is a popular open source library developed as a means to access the financial data available on Yahoo Finance" offering a "range of market data on stocks, bonds, currencies and crytpocurrencies." [Source: yfinance Libarary - A Complete Guide](https://algotrading101.com/learn/yfinance-guide/#:~:text=What%20is%20yfinance%3F%20yfinance%20is%20a%20popular%20open,market%20data%20on%20stocks%2C%20bonds%2C%20currencies%20and%20cryptocurrencies.)
+  The yfinance Library data source "is a popular open source library developed as a means to access the financial data available on Yahoo Finance" offering a "range of market data on stocks, bonds, currencies and cryptocurrencies." [Source: yfinance Library - A Complete Guide](https://algotrading101.com/learn/yfinance-guide/#:~:text=What%20is%20yfinance%3F%20yfinance%20is%20a%20popular%20open,market%20data%20on%20stocks%2C%20bonds%2C%20currencies%20and%20cryptocurrencies.)
 
 
 ### Questions the App will Answer with the Data
 
-  * Based on the data input into the NN model, provide a data-driven buy/sell recommendation to the end user on a selected stock on their interest.
+Based on the data input into the NN model, provide a data-driven buy/sell/hold recommendation to the end user on a selected stock on their interest.
 
 ### Description of Data Exploration
 
@@ -51,7 +51,7 @@ We were looking for the datasets that had numerous metrics and ratios around sto
 
 The Kaggle data set contained more than 30 fields and a large number of data points sufficient to fit the neural net or machine learning model. We also extracted data from the yfinance library and official Yahoo Finance API. Both contained a rich set of data points for stock fundamentals as well as historical data.
 
-Extracts from these data sets have been loaded into DataFrames in Jupyter Notebook, reviewed for missing and Null values, data types, descriptive statistics for each column, and any data anomalies. 
+Extracts from these data sets have been loaded into Data Frames in Jupyter Notebook, reviewed for missing and Null values, data types, descriptive statistics for each column, and any data anomalies. 
 
 At the conclusion of the data exploration, we established that the Kaggle data set does meet the requirements as the main data set for the project machine learning / deep learning training.
 
@@ -59,7 +59,7 @@ The yfinance library does meet the requirements for the on-demand request of the
 
 ### Description of the Data Analysis
 
-We have reviewed the following potential features and analysed their impact on the predicting the stock price. 
+We have reviewed the following potential features and analyzed their impact on the predicting the stock price. 
 
 - **DE Ratio**: The debt-to-equity (D/E) ratio compares a company's total liabilities to its shareholder equity 
 - **Trailing P/E**: The price-to-earnings ratio (P/E ratio) is the ratio for valuing a company that measures its current share price relative to its earnings per share (EPS)
@@ -106,23 +106,23 @@ A databased was created using PostgreSQL.
 
 ## Machine Learning Model
 
-### Description of preliminary data preprocessing
+### Description of Data Preprocessing
 
 - Dropped columns that did not contribute to the prediction
 - Replaced NaN (null) values with mean values for each stock ticker
 - Removed remaining rows that contained NaN values 
-- Removed rows with outliers beyong 3 standard deviation from the mean
+- Removed rows with outliers beyond 3 standard deviation from the mean
 - Scaled the training data to Mean = 0 and STD = 1 (with Standard Scaler)
 
-### Description of preliminiary feature engineering and preliminary feature selection, including our decision-making process
+### Description of feature engineering and feature selection, including our decision-making process
 
 The data points that have no statistically significant correlation with stock price have been dropped from the feature set: **Market Cap, Enterprise Value, EBITDA, Net Income Available to Common Shareholders, Total Cash, Total Debt.**
 
-The remaining data points have been used to train the machine learnign and neural network models.
+The remaining data points have been used to train the machine learning and neural network models.
 
 ### Images from the initial analysis
 
-#### Initial DataFrame
+#### Initial Data Frame
 
 ![df1](Resources/df1.png)
 
@@ -134,7 +134,7 @@ The remaining data points have been used to train the machine learnign and neura
 
 ![df3](Resources/df3.png)
 
-#### Drop remainign rows wuth Null values
+#### Drop remaining rows with Null values
 
 ![df4](Resources/df4.png)
 
@@ -152,25 +152,21 @@ The remaining data points have been used to train the machine learnign and neura
 
 ### Description of how data was split into training and testing sets
 
-The cleaned data set has been split into the trainign and testing data sets with the **train_test_split** method from the **sklearn.model_selection** library. The standard split is 75% of the data into the training set and 25% of the data into the testing set.
+The cleaned data set has been split into the training and testing data sets with the **train_test_split** method from the **sklearn.model_selection** library. The standard split is 75% of the data into the training set and 25% of the data into the testing set.
 
 ### Explanation of model choice, including limitations and benefits
 
-The target variable is continiuos data, hence regression models have been chosen. The following models have been evaluated:
+The target variable is continuous data, hence regression models have been chosen. The following models have been evaluated:
 
 1. Linear Regression
-
 2. Decision Tree
-
 3. Support Vector Regression
-
 4. Lasso Regression
-
 5. Random Forest
 
-Adjusted R-Square Method has been used to evaluate the model accuracy. The Random forest model has generated the best results out of the machine learnign models. 
+Adjusted R-Square Method has been used to evaluate the model accuracy. The Random forest model has generated the best results out of the machine learning models. 
 
-Then, we tried to run neural network models with various layers, number of neurons, activation function, and number of epochs. The neural netowrk model has generated even better results and has been chosen for the final app.
+Then, we tried to run neural network models with various layers, number of neurons, activation function, and number of epochs. The neural network model has generated even better results and has been chosen for the final app.
 
 ### Model Overview 
 
@@ -231,13 +227,13 @@ Initially, the model was developed based on 8 features:
 
 We have also used the SELU activation functions in layers 2 & 3 and in the output layer of the model.
 
-The initial model accuracy was lower than expected at 0.07 Adjusted R-Sqaure. Hence, we have expanded the list of features and replaced the SELU activation function with RELU at all layers, which generated higher accuracy.
+The initial model accuracy was lower than expected at 0.07 Adjusted R-Square. Hence, we have expanded the list of features and replaced the SELU activation function with RELU at all layers, which generated higher accuracy.
 
 Another major change described in **Data Transformation** section was introducing initial data transformation with unsupervised learning breaking the data into 6 clusters and fitting individual model for each cluster.
 
 ### Description of how we have trained the model thus far, and any additional training that will take place
 
-Before training the model, we ensured that the data was clean and separated it into Trainign and Test datasets (see **Description of how data was split into training and testing sets**). The datasets have been normalized with the StandardScaler (see **Description of preliminary data preprocessing**). Then, the datasets have been clustered into 6 clusters based on the unsupervised machine learning model (see **Data transformation**).
+Before training the model, we ensured that the data was clean and separated it into Training and Test datasets (see **Description of how data was split into training and testing sets**). The datasets have been normalized with the StandardScaler (see **Description of preliminary data preprocessing**). Then, the datasets have been clustered into 6 clusters based on the unsupervised machine learning model (see **Data transformation**).
 
 **Data Scaling**
 
@@ -261,9 +257,9 @@ The model training was conducted on 100 epochs. The **loss function** (*mean_abs
 
 ### Description of current accuracy score (Model Evaluation)
 
-Adjusted R-Square has been used to evaluate the each Model accuracy. 
+Adjusted R-Square has been used to evaluate each Model accuracy. 
 
-R Square measures how much variability in dependent variable can be explained by the model. It is the square of the Correlation Coefficient(R). It is is a good measure to determine how well the model fits the dependent variables. However, it does not take into consideration of overfitting problem. 
+R-Square measures how much variability in dependent variable can be explained by the model. It is the square of the Correlation Coefficient(R). It is a good measure to determine how well the model fits the dependent variables. However, it does not take into consideration of overfitting problem. 
 
 In our case, the regression model has many feature (independent) variables and it may fit well to the training data but performs badly for testing data. As a result, the Adjusted R Square has been used to prevent potential overfitting issues.
 
@@ -332,8 +328,6 @@ The R-Square results for each model are shown below.
 https://docs.google.com/presentation/d/1hXU28unDzPH3O0gM9gG7vCKDZXwtV4GZLEZ8WskptY0/edit?usp=sharing
 
 ### Description of the tool(s) that are used to create final dashboard
-
-NEED DESCRIPTION
 
 We used Java Script and Python Script to create our dashboard.
 
