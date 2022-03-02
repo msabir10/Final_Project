@@ -293,6 +293,12 @@ The R-Square results for each model are shown below.
 
 ![Model7](Resources/rsquared7.png)
 
+### Description and explanation of model’s confusion matrix, including final accuracy score
+
+The confusion matrix has not been used for we have used two types of models in the App: Regression Models (we have got continiuos value) and Unsupervised Learning Models. The Confusion Matrix is the metrics used for finding the accuracy of Supervised Learning Classification models, it's not used for continiuos values.
+
+For the future releases of the App, we can attempt to convert continious value (stock prices) into classes and apply the confusion matrix.
+
 ### Overall User Experience
 
 #### A. Explore individual stock ticker (Core Product Feature)
