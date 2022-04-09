@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 #from config import postgres_pass#, heroku_pass, heroku_URI
 import analyze
-import yfinance as yf
+import yfinance as yf # Yahoo Finance Library
 import plotly
 import plotly.express as px
 from boto.s3.connection import S3Connection
