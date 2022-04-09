@@ -290,7 +290,7 @@ def recommendation(cp, pp):
     return rec
 
 def run_all(ticker):
-
+    # run all functions
     initialize_table()
     data_predict(ticker)
     #create_plot()
