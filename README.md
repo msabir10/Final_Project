@@ -1,4 +1,4 @@
-# Final_Project
+# Stock Optimizer
 
 Presentation Link: https://docs.google.com/presentation/d/1DhafRC4UR8gYSsYWFzmQp2ccarPR_o2Tjhe-K0d2gU8/edit?usp=sharing
 
